@@ -51,7 +51,7 @@ const Login = () => {
       if (response.data.data.role === "admin") {
         navigate("/admin");
       } else {
-        navigate("/");
+        navigate("/movies");
       }
 
       const alert = (
