@@ -1,9 +1,8 @@
-import { Navigate, Outlet, useNavigate } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import Login from "./pages/auth_form/login";
 
 
 const PrivateRoute = () => {
-    const navigate = useNavigate()
     const isLogginUser = JSON.parse(localStorage.getItem("userLoggedIn"))?.isLoggin
 
     console.log(isLogginUser);

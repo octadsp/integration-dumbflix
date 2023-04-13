@@ -9,6 +9,7 @@ type User struct {
 	Phone     string `json:"phone"`
 	Address   string `json:"address"`
 	Subscribe string `json:"subscribe"`
+	Role      string `json:"role"`
 }
 
 type UsersResponse struct {
@@ -20,6 +21,7 @@ type UsersResponse struct {
 	Phone     string `json:"phone"`
 	Address   string `json:"address"`
 	Subscribe string `json:"subscribe"`
+	Role      string `json:"role"`
 }
 
 func (UsersResponse) TableName() string {
