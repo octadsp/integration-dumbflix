@@ -23,6 +23,7 @@ const Payment = () => {
         </div>
 
         {/* Description */}
+        
         <div>
           <div className="mt-5">
           <p>Bayar sekarang dan nikmati streaming film-film yang kekinian dari&nbsp;
