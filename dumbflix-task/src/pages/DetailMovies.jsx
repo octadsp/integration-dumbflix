@@ -30,6 +30,7 @@ const DetailMovies = () => {
 
   return (
     <>
+    <Navbar />
       <div className="relative">
         <div className="mx-36 pt-12">
           <ReactPlayer

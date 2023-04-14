@@ -115,8 +115,17 @@ func (h *handlerAuth) Login(c echo.Context) error {
 	loginResponse := authdto.LoginResponse{
 		Email: user.Email,
 		Token: token,
-		Role: user.Role,
+		Role:  user.Role,
 	}
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: loginResponse})
+}
+
+func (h *handlerAuth) CheckAuth(c echo.Context) error {
+	userLogin := c.Get("userLogin")
+	userId := userLogin.(jwt.MapClaims)["id"].(float64)
+
+	user, _ := h.AuthRepository.CheckAuth(int(userId))
+
+	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: user})
 }

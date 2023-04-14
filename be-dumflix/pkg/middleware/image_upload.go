@@ -11,7 +11,7 @@ import (
 func UploadImage(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		// Get the uploaded file from the request
-		file, err := c.FormFile("image")
+		file, err := c.FormFile("thumbnail")
 		if err != nil {
 			return c.JSON(http.StatusBadRequest, err)
 		}

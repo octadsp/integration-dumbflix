@@ -43,6 +43,7 @@ const ListTransaction= () => {
 
     return(
         <>
+        <Navbar />
         <div className="pt-20">
             <div className="flex mx-auto w-3/4">
             <h1 className="py-5 text-white text-xl font-bold">Incoming Transaction</h1>

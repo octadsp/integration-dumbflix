@@ -8,21 +8,25 @@ import AdminFilm from "./AdminFilm";
 
 import Image from "../assets/witcher.png";
 
-const Home = () => {
-  const isLogginUser = JSON.parse(
-    localStorage.getItem("userLoggedIn")
-  )?.isLoggin;
+// Import useContext
+import { useContext } from "react";
 
-  const isAdmin =
-    JSON.parse(localStorage.getItem("userLoggedIn"))?.roles == "admin";
+// Import UserContext
+import { UserContext } from "../context/userContext";
+
+const Home = () => {
+
+  // UserContext
+  const [state] = useContext(UserContext);
 
   return (
     <>
-      {isLogginUser ? (
-        isAdmin ? (
+      {state.isLogin ? (
+        state.user.role == "admin" ? (
           <AdminFilm />
         ) : (
           <>
+          <Navbar />
             <Body
               image={Image}
               title={"The Witcher"}
@@ -38,6 +42,7 @@ const Home = () => {
         )
       ) : (
         <>
+        <Navbar />
           <Login />
           <Register />
           <Body

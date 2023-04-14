@@ -10,6 +10,7 @@ import LocationImg from "../assets/icons/location.png"
 const Profile = () => {
   return (
     <>
+    <Navbar />
     <div className='flex place-content-center bg-red pt-24'>
     <div className='rounded bg-light-black shadow-xl w-1/2'>
         

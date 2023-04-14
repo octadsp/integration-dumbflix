@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
 import logo from "../../assets/logo.png";
 import filmImg from "../../assets/dropdown/filmdropdown.png";
@@ -6,18 +7,24 @@ import billImg from "../../assets/dropdown/billdropdown.png";
 import profileImg from "../../assets/dropdown/profiledropdown.png";
 import logoutImg from "../../assets/dropdown/logoutdropdown.png";
 
+// Import UserContext
+import { UserContext } from "../../context/userContext";
+
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const isLogginUser = JSON.parse(
-    localStorage.getItem("userLoggedIn")
-  )?.isLoggin;
+  // UserContext
+  const [state] = useContext(UserContext);
 
-  const isAdmin =
-    JSON.parse(localStorage.getItem("userLoggedIn"))?.roles == "admin";
+  // const isLogginUser = JSON.parse(
+  //   localStorage.getItem("userLoggedIn")
+  // )?.isLoggin;
+
+  // const isAdmin =
+  //   JSON.parse(localStorage.getItem("userLoggedIn"))?.roles == "admin";
 
   const handleLogout = () => {
-    localStorage.removeItem("userLoggedIn");
+    localStorage.removeItem("token");
 
     //Reload Page
     window.location.reload();
@@ -28,8 +35,8 @@ const Navbar = () => {
   return (
     <nav className="fixed left-0 right-0 z-10">
       <div className="flex justify-between items-center bg-light-black py-3">
-        {isLogginUser ? (
-          isAdmin ? (
+        {state.isLogin ? (
+          state.user.role == "admin" ? (
             <div className="pl-5">
               <img className="w-24" src={logo} />
             </div>
@@ -72,8 +79,8 @@ const Navbar = () => {
           </>
         )}
 
-        {isLogginUser ? (
-          isAdmin ? (
+        {state.isLogin ? (
+          state.user.role == "admin" ? (
             <>
               <div className="dropdown dropdown-end dropdown-hover">
                 <div className="flex items-center mr-8 text-sm font-bold">

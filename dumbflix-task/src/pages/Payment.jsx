@@ -11,6 +11,8 @@ const Payment = () => {
 
 
   return (
+    <>
+    <Navbar />
     <div className=" bg-black h-[100vh]">
         <div className="grid place-content-center">
         {/* Title */}
@@ -56,6 +58,7 @@ const Payment = () => {
             </div>
         </div>
     </div>
+    </>
   )
 }
 

@@ -1,17 +1,34 @@
-import { Navigate, Outlet } from "react-router-dom"
-import Login from "./pages/auth_form/login";
+import { Navigate, Outlet } from "react-router-dom";
 
+// Import context
+import { useContext } from "react";
 
-const PrivateRoute = () => {
-    const isLogginUser = JSON.parse(localStorage.getItem("userLoggedIn"))?.isLoggin
+// Import UserContext
+import { UserContext } from "../context/userContext";
 
-    console.log(isLogginUser);
+export function PrivateRouteLogin() {
+  const [state] = useContext(UserContext);
 
-    if(isLogginUser) {
-        return <Outlet />;
-    } else {
-        return <Navigate to={'/'} />
-    }
+  if (!state.isLogin) {
+    return <Navigate to="/" />;
+  }
+  return <Outlet />;
 }
 
-export default PrivateRoute;
+export function PrivateRouteUser() {
+  const [state] = useContext(UserContext);
+
+  if (state.user.role === "admin") {
+    return <Navigate to="/admin" />;
+  }
+  return <Outlet />;
+}
+
+export function PrivateRouteAdmin() {
+  const [state] = useContext(UserContext);
+
+  if (state.user.role !== "admin") {
+    return <Navigate to="/" />;
+  }
+  return <Outlet />;
+}

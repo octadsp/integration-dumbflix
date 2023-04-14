@@ -30,6 +30,7 @@ const AdminDetailFilm = () => {
 
     return (
         <>
+        <Navbar />
         <div className="relative">
             <div className="mx-36 pt-12">
             <iframe className="w-full object-contain h-[500px]" src={dataMovie?.tumbnail} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
