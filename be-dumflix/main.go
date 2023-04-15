@@ -35,5 +35,5 @@ func main() {
 	e.Static("/uploads", "./uploads")
 
 	fmt.Println("Server berjalan di port 5000")
-	e.Logger.Fatal(e.Start("localhost:5000"))
+	e.Logger.Fatal(e.Start(":5000"))
 }

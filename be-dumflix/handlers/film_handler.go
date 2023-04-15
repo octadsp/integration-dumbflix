@@ -12,7 +12,8 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-var path_file = "http://localhost:5500/uploads/"
+// path_file harus sama dengan port main.go untuk bisa menampilkan image ke front_end
+var path_file = "http://localhost:5000/uploads/"
 
 type handlerFilm struct {
 	FilmRepository repository.FilmRepository

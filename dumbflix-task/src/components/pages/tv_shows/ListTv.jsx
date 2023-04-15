@@ -1,37 +1,61 @@
 import { useEffect, useState } from "react";
 
-export default function ListMovie () {
-    const [dataTv, setDataTv] = useState();
+// Import useQuery
+import { useQuery } from "react-query";
 
-    useEffect(() => {
-        fetch(`https://api.npoint.io/4a8891249c5a1195708d`)
-        .then((response) => response.json())
-        .then((json)=> {
-            setDataTv(json);
-        });
+// Import API config
+import { API } from "../../../config/api";
 
-        return ()=> {
-            setDataTv(null);
-        };
-    }, []);
+const ListTv = () => {
+  // Fetching data films from database
+  let { data: films } = useQuery("filmsCache", async () => {
+    const response = await API.get("/films");
+    return response.data.data;
+  });
 
-    return (
-        <div className="bg-black px-5">
-            <h1 className='font-bold text-white text-lg'>Movies</h1>
+  const categoryFilms = films?.filter((film) => film.category_id === 1);
 
-            <div className="grid grid-cols-6">
-                {dataTv && dataTv.map ((index) => (
-                    <div className="card-body px-5">
-                        <div className='w-[200px] h-[300px]' >
-                            <img className='h-full' src={index.moviecard} alt="Burger" />
-                        </div>
-                        <div>
-                            <h1 className='mb-3'>{index.title}</h1>
-                            <p>{index.years}</p>
-                        </div>
-                    </div> 
-                ))}
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className="bg-black px-5">
+      <h1 className="font-bold text-white text-lg">Movies</h1>
+
+      <div>
+        {films?.length !== 0 ? (
+          <div className="grid grid-cols-6 gap-2">
+            {categoryFilms?.map((item, index) => (
+              <>
+                <div className="card-body px-5">
+                  <div className="w-[200px] h-[300px]" key={index}>
+                    <img
+                      className="h-full"
+                      src={item.thumbnail}
+                      alt={item.title}
+                    />
+                  </div>
+                  <div>
+                    <h1 className="mb-3">{item.title}</h1>
+                    <p>{item.year}</p>
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+        ) : (
+          <div className="card-body px-5">
+            {films?.map((item, index) => (
+              <>
+                <div className="w-[200px] h-[300px]"></div>
+                <div>
+                  <h1 className="mb-3">Film not found</h1>
+                  <p></p>
+                </div>
+              </>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ListTv;

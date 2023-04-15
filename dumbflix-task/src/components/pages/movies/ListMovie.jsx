@@ -1,39 +1,61 @@
 import { useEffect, useState } from "react";
 
-export default function ListMovie() {
-  const [dataMovieList, setDataMovieList] = useState();
+// Import useQuery
+import { useQuery } from "react-query";
 
-  useEffect(() => {
-    fetch(`https://api.npoint.io/4a8891249c5a1195708d`)
-      .then((response) => response.json())
-      .then((json) => {
-        setDataMovieList(json);
-      });
+// Import API config
+import { API } from "../../../config/api";
 
-    return () => {
-      setDataMovieList(null);
-    };
-  }, []);
+const ListMovie = () => {
+  // Fetching data films from database
+  let { data: films } = useQuery("filmsCache", async () => {
+    const response = await API.get("/films");
+    return response.data.data;
+  });
+
+  const categoryFilms = films?.filter((film) => film.category_id === 2)
 
   return (
     <div className="bg-black px-5">
       <h1 className="font-bold text-white text-lg">Movies</h1>
 
-      <div className="grid grid-cols-6 gap-2">
-        {dataMovieList &&
-          dataMovieList.map((each) => (
-            // Tambahhin a untuk navigate ke /detail/${id}
-            <div className="card-body px-5">
-              <div className="w-[200px] h-[300px]">
-                <img className="h-full" src={each.moviecard} alt="Burger" />
-              </div>
-              <div>
-                <h1 className="mb-3">{each.title}</h1>
-                <p>{each.years}</p>
-              </div>
-            </div>
-          ))}
+      <div>
+        {films?.length !== 0 ? (
+          <div className="grid grid-cols-6 gap-2">
+            {categoryFilms?.map((item, index) => (
+              <>
+                <div className="card-body px-5">
+                  <div className="w-[200px] h-[300px]" key={index}>
+                    <img
+                      className="h-full"
+                      src={item.thumbnail}
+                      alt={item.title}
+                    />
+                  </div>
+                  <div>
+                    <h1 className="mb-3">{item.title}</h1>
+                    <p>{item.year}</p>
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+        ) : (
+          <div className="card-body px-5">
+            {films?.map((item, index) => (
+              <>
+                <div className="w-[200px] h-[300px]"></div>
+                <div>
+                  <h1 className="mb-3">Film not found</h1>
+                  <p></p>
+                </div>
+              </>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
+export default ListMovie;

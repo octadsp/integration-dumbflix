@@ -3,6 +3,7 @@ import ListTv from "../components/pages/movies/ListMovie";
 import DropArrow from "../assets/dropdown/droparrow.png";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/pages/Navbar";
+import ListMovie from "../components/pages/movies/ListMovie";
 
 const AdminFilm = () => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const AdminFilm = () => {
           </a>
         </div>
       </div>
-      <ListTv />
+      <ListMovie />
     </>
   );
 };
