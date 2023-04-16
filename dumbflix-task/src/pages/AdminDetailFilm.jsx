@@ -1,5 +1,6 @@
 // Import Component
 import Navbar from "../components/pages/Navbar";
+import EpisodeModal from "../components/modal/EpisodeModal";
 
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
@@ -80,14 +81,14 @@ const DetailMovies = () => {
           <div className="flex justify-end">
             <div className="mt-5 mr-24">
               <label
-                htmlFor="my-modal-episode"
-                id="my-modal-episode"
+                htmlFor="my-modal-4"
                 className="btn bg-red-600 px-8 py-1 text-center text-white rounded"
               >
                 Add Episode
               </label>
             </div>
           </div>
+          <EpisodeModal />
 
           <div className="flex justify-between">
             {/* LEFT CARD */}
