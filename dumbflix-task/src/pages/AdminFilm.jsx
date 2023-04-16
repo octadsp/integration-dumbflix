@@ -4,10 +4,11 @@ import DropArrow from "../assets/dropdown/droparrow.png";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/pages/Navbar";
 import ListMovie from "../components/pages/movies/ListMovie";
-import { useState } from "react";
+import DeleteFilmModal from "../components/modal/DeleteFilmModal";
+import { useEffect, useState } from "react";
 
-// Import useQuery
-import { useQuery } from "react-query";
+// Import react-query
+import { useQuery, useMutation } from "react-query";
 
 // Import API config
 import { API } from "../config/api";
@@ -18,26 +19,49 @@ const AdminFilm = () => {
   // State Category Change
   const [selectedCategory, setSelectedCategory] = useState("tvseries");
 
+  // Variabel for delete product data
+  const [idDelete, setIdDelete] = useState(null);
+
+  // For get id product & show modal confirm delete data
+  const handleDelete = (id) => {
+    setIdDelete(id);
+  };
+
+  // If confirm is true, execute delete data
+  const deleteById = useMutation(async (id) => {
+    try {
+      await API.delete(`/film/${id}`);
+      refetch();
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  console.log(idDelete);
+
+  useEffect(() => {
+    // execute delete data by id function
+    deleteById.mutate(idDelete);
+  }, [idDelete]);
+
   // Handle on Category change
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
   };
 
-  // State Handle Update Film
+  // Handle Update Film
   const handleEdit = (id) => {
     navigate("/updatefilm/" + id);
   };
 
   // Fetching data films from database
-  let { data: films } = useQuery("filmsCache", async () => {
+  let { data: films, refetch } = useQuery("filmsCache", async () => {
     const response = await API.get("/films");
     return response.data.data;
   });
 
   const categoryFilms1 = films?.filter((film) => film.category_id === 1);
   const categoryFilms2 = films?.filter((film) => film.category_id === 2);
-
-  console.log(categoryFilms1);
 
   return (
     <>
@@ -99,15 +123,21 @@ const AdminFilm = () => {
                         </Link>
                         <div>
                           <div className="flex justify-evenly">
-                            <button
+                            <label
                               onClick={() => {
                                 handleEdit(item.id);
                               }}
-                              className="bg-green-500 text-white font-bold rounded px-6"
+                              className="btn bg-green-500 text-white font-bold rounded px-6"
                             >
                               Edit
-                            </button>
-                            <button className="bg-red-600 text-white font-bold rounded px-4">
+                            </label>
+                            <button
+                              onClick={() => {
+                                handleDelete(item.id);
+                              }}
+                              htmlFor="my-modal"
+                              className="btn bg-red-600 text-white font-bold rounded"
+                            >
                               Delete
                             </button>
                           </div>
@@ -159,17 +189,23 @@ const AdminFilm = () => {
                         </Link>
                         <div>
                           <div className="flex justify-evenly">
-                            <button
+                            <label
                               onClick={() => {
                                 handleEdit(item.id);
                               }}
-                              className="bg-green-500 text-white font-bold rounded px-6"
+                              className="btn bg-green-500 text-white font-bold rounded px-6"
                             >
                               Edit
-                            </button>
-                            <button className="bg-red-600 text-white font-bold rounded px-4">
+                            </label>
+                            <button
+                              onClick={() => {
+                                handleDelete(item.id);
+                              }}
+                              className="btn bg-red-600 text-white font-bold rounded"
+                            >
                               Delete
                             </button>
+                            <DeleteFilmModal />
                           </div>
                         </div>
                       </div>

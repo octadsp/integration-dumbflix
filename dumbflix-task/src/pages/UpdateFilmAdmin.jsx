@@ -35,11 +35,6 @@ const UpdateFilmAdmin = () => {
     setCategories(responseCategories.data.data);
     setPreview(responseFilm.data.data.thumbnail);
 
-    // const newCategoryId = responseFilm.data.data?.category?.map((item) => {
-    //   return item.id;
-    // });
-    // console.log(newCategoryId);
-
     setForm({
       ...form,
       title: responseFilm.data.data.title,

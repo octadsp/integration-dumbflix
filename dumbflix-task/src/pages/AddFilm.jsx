@@ -214,10 +214,10 @@ const AddFilm = () => {
             </div>
           </div> */}
           <div className="w-full flex justify-end text-white">
-            <div className="w-44 mt-6">
+            <div className="">
               <button
                 type="submit"
-                className="bg-red-600 flex justify-center rounded py-1 cursor-pointer"
+                className="bg-red-600 flex justify-center font-bold text-white rounded px-16 py-1 cursor-pointer"
               >
                 Save
               </button>
