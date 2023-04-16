@@ -48,6 +48,18 @@ func (h *handlerFilm) GetFilm(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: film})
 }
+func (h *handlerFilm) GetFilmAdmin(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+
+	film, err := h.FilmRepository.GetFilm(id)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+
+	film.Thumbnail = path_file + film.Thumbnail
+
+	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: film})
+}
 
 func (h *handlerFilm) AddFilm(c echo.Context) error {
 	imageFile := c.Get("imageFile").(string)

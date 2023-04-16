@@ -34,6 +34,12 @@ func (r *repository) GetFilm(ID int) (models.Film, error) {
 
 	return film, err
 }
+func (r *repository) GetFilmAdmin(ID int) (models.Film, error) {
+	var film models.Film
+	err := r.db.Preload("Category").First(&film, ID).Error
+
+	return film, err
+}
 
 func (r *repository) AddFilm(film models.Film) (models.Film, error) {
 	err := r.db.Create(&film).Error

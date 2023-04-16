@@ -13,6 +13,7 @@ import Payment from "./pages/Payment";
 import AdminFilm from "./pages/AdminFilm";
 import ListTransaction from "./pages/ListTransaction";
 import AddFilm from "./pages/AddFilm";
+import AdminDetailFilm from "./pages/AdminDetailFilm";
 import {
   PrivateRouteAdmin,
   PrivateRouteLogin,
@@ -91,6 +92,7 @@ const App = () => {
               <Route exact path="/transaction" element={<ListTransaction />} />
               <Route exact path="/admin" element={<AdminFilm />} />
               <Route exact path="/addfilm" element={<AddFilm />} />
+              <Route exact path="/filmadmin/:id" element={<AdminDetailFilm />} />
             </Route>
           </Route>
         </Routes>

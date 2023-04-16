@@ -1,42 +1,56 @@
 import ListTv from "../components/pages/movies/ListMovie";
 
 import DropArrow from "../assets/dropdown/droparrow.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/pages/Navbar";
 import ListMovie from "../components/pages/movies/ListMovie";
+import { useState } from "react";
+
+// Import useQuery
+import { useQuery } from "react-query";
+
+// Import API config
+import { API } from "../config/api";
 
 const AdminFilm = () => {
   const navigate = useNavigate();
 
+  // State Category Change
+  const [selectedCategory, setSelectedCategory] = useState("tvseries");
+
+  // Handle on Category change
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  // Fetching data films from database
+  let { data: films } = useQuery("filmsCache", async () => {
+    const response = await API.get("/films");
+    return response.data.data;
+  });
+
+  const categoryFilms1 = films?.filter((film) => film.category_id === 1);
+  const categoryFilms2 = films?.filter((film) => film.category_id === 2);
+
+  console.log(categoryFilms1);
+
   return (
     <>
-    <Navbar />
-      <div></div>
+      <Navbar />
       <div className="pt-24 pb-12 bg-black flex justify-between">
         <div className="flex flex-row">
           <h3 className="text-white text-3xl font-bold pl-5 mr-10">
             List Film
           </h3>
           <div className="dropdown flex">
-            <label
-              tabIndex={0}
-              className="flex flex-row rounded border-2 px-3 border-white m-1 w-28"
-            >
-              Category
-              <img className="h-4 pt-2 pl-2" src={DropArrow} />
-            </label>
             <div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-light-black rounded-box w-52"
+              <select
+                onChange={handleCategoryChange}
+                className="flex flex-row rounded border-2 px-1 border-white m-1 w-28 text-white bg-light-black"
               >
-                <li>
-                  <a>TV Series</a>
-                </li>
-                <li>
-                  <a>Movies</a>
-                </li>
-              </ul>
+                <option value="tvseries">TV Series</option>
+                <option value="movies">Movies</option>
+              </select>
             </div>
           </div>
         </div>
@@ -50,7 +64,90 @@ const AdminFilm = () => {
           </a>
         </div>
       </div>
-      <ListMovie />
+
+      <div>
+        {selectedCategory === "tvseries" ? (
+          <div className="bg-black px-5">
+            <h1 className="font-bold text-white text-lg">Movies</h1>
+
+            <div>
+              {films?.length !== 0 ? (
+                <div className="grid grid-cols-6 gap-2">
+                  {categoryFilms1?.map((item, index) => (
+                    <>
+                      <Link to={`/filmadmin/${item.id}`} className="card-body px-5">
+                        <div className="w-[200px] h-[300px]" key={index}>
+                          <img
+                            className="h-full"
+                            src={item.thumbnail}
+                            alt={item.title}
+                          />
+                        </div>
+                        <div>
+                          <h1 className="mb-3">{item.title}</h1>
+                          <p>{item.year}</p>
+                        </div>
+                      </Link>
+                    </>
+                  ))}
+                </div>
+              ) : (
+                <div className="card-body px-5">
+                  {films?.map((item, index) => (
+                    <>
+                      <div className="w-[200px] h-[300px]"></div>
+                      <div>
+                        <h1 className="mb-3">Film not found</h1>
+                        <p></p>
+                      </div>
+                    </>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="bg-black px-5">
+            <h1 className="font-bold text-white text-lg">Movies</h1>
+
+            <div>
+              {films?.length !== 0 ? (
+                <div className="grid grid-cols-6 gap-2">
+                  {categoryFilms2?.map((item, index) => (
+                    <>
+                      <Link to={`/filmadmin/${item.id}`} className="card-body px-5">
+                        <div className="w-[200px] h-[300px]" key={index}>
+                          <img
+                            className="h-full"
+                            src={item.thumbnail}
+                            alt={item.title}
+                          />
+                        </div>
+                        <div>
+                          <h1 className="mb-3">{item.title}</h1>
+                          <p>{item.year}</p>
+                        </div>
+                      </Link>
+                    </>
+                  ))}
+                </div>
+              ) : (
+                <div className="card-body px-5">
+                  {films?.map((item, index) => (
+                    <>
+                      <div className="w-[200px] h-[300px]"></div>
+                      <div>
+                        <h1 className="mb-3">Film not found</h1>
+                        <p></p>
+                      </div>
+                    </>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };
