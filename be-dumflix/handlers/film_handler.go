@@ -133,15 +133,7 @@ func (h *handlerFilm) EditFilm(c echo.Context) error {
 		film.Description = request.Description
 	}
 
-	editedFilm := models.Film{
-		Title:       request.Title,
-		Thumbnail:   request.Thumbnail,
-		Year:        request.Year,
-		CategoryID:  request.CategoryID,
-		Description: request.Description,
-	}
-
-	editedFilm, err := h.FilmRepository.EditFilm(editedFilm)
+	editedFilm, err := h.FilmRepository.EditFilm(film)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, dto.ErrorResult{Code: http.StatusInternalServerError, Message: err.Error()})
 	}

@@ -23,6 +23,11 @@ const AdminFilm = () => {
     setSelectedCategory(e.target.value);
   };
 
+  // State Handle Update Film
+  const handleEdit = (id) => {
+    navigate("/updatefilm/" + id);
+  };
+
   // Fetching data films from database
   let { data: films } = useQuery("filmsCache", async () => {
     const response = await API.get("/films");
@@ -68,26 +73,46 @@ const AdminFilm = () => {
       <div>
         {selectedCategory === "tvseries" ? (
           <div className="bg-black px-5">
-            <h1 className="font-bold text-white text-lg">Movies</h1>
+            <h1 className="font-bold text-white text-lg">TV Series</h1>
 
             <div>
               {films?.length !== 0 ? (
                 <div className="grid grid-cols-6 gap-2">
                   {categoryFilms1?.map((item, index) => (
                     <>
-                      <Link to={`/filmadmin/${item.id}`} className="card-body px-5">
-                        <div className="w-[200px] h-[300px]" key={index}>
-                          <img
-                            className="h-full"
-                            src={item.thumbnail}
-                            alt={item.title}
-                          />
-                        </div>
+                      <div>
+                        <Link
+                          to={`/filmadmin/${item.id}`}
+                          className="card-body px-5"
+                        >
+                          <div className="w-[200px] h-[300px]" key={index}>
+                            <img
+                              className="h-full"
+                              src={item.thumbnail}
+                              alt={item.title}
+                            />
+                          </div>
+                          <div>
+                            <h1 className="mb-3">{item.title}</h1>
+                            <p>{item.year}</p>
+                          </div>
+                        </Link>
                         <div>
-                          <h1 className="mb-3">{item.title}</h1>
-                          <p>{item.year}</p>
+                          <div className="flex justify-evenly">
+                            <button
+                              onClick={() => {
+                                handleEdit(item.id);
+                              }}
+                              className="bg-green-500 text-white font-bold rounded px-6"
+                            >
+                              Edit
+                            </button>
+                            <button className="bg-red-600 text-white font-bold rounded px-4">
+                              Delete
+                            </button>
+                          </div>
                         </div>
-                      </Link>
+                      </div>
                     </>
                   ))}
                 </div>
@@ -95,7 +120,7 @@ const AdminFilm = () => {
                 <div className="card-body px-5">
                   {films?.map((item, index) => (
                     <>
-                      <div className="w-[200px] h-[300px]"></div>
+                      <div className="w-[200px] h-[300px]" key={index}></div>
                       <div>
                         <h1 className="mb-3">Film not found</h1>
                         <p></p>
@@ -115,19 +140,39 @@ const AdminFilm = () => {
                 <div className="grid grid-cols-6 gap-2">
                   {categoryFilms2?.map((item, index) => (
                     <>
-                      <Link to={`/filmadmin/${item.id}`} className="card-body px-5">
-                        <div className="w-[200px] h-[300px]" key={index}>
-                          <img
-                            className="h-full"
-                            src={item.thumbnail}
-                            alt={item.title}
-                          />
-                        </div>
+                      <div>
+                        <Link
+                          to={`/filmadmin/${item.id}`}
+                          className="card-body px-5"
+                        >
+                          <div className="w-[200px] h-[300px]" key={index}>
+                            <img
+                              className="h-full"
+                              src={item.thumbnail}
+                              alt={item.title}
+                            />
+                          </div>
+                          <div>
+                            <h1 className="mb-3">{item.title}</h1>
+                            <p>{item.year}</p>
+                          </div>
+                        </Link>
                         <div>
-                          <h1 className="mb-3">{item.title}</h1>
-                          <p>{item.year}</p>
+                          <div className="flex justify-evenly">
+                            <button
+                              onClick={() => {
+                                handleEdit(item.id);
+                              }}
+                              className="bg-green-500 text-white font-bold rounded px-6"
+                            >
+                              Edit
+                            </button>
+                            <button className="bg-red-600 text-white font-bold rounded px-4">
+                              Delete
+                            </button>
+                          </div>
                         </div>
-                      </Link>
+                      </div>
                     </>
                   ))}
                 </div>

@@ -48,7 +48,6 @@ const DetailMovies = () => {
   return (
     <>
       <Navbar />
-      <h1>ADMIN</h1>
       <div className="relative">
         <div className="mx-36 pt-12">
           {episodes?.map((item, index) => {
@@ -80,7 +79,13 @@ const DetailMovies = () => {
           {/* BUTTON ADD EPISODE */}
           <div className="flex justify-end">
             <div className="mt-5 mr-24">
-              <button className=" bg-red-600 px-8 py-1 text-center text-white rounded">Add Episode</button>
+              <label
+                htmlFor="my-modal-episode"
+                id="my-modal-episode"
+                className="btn bg-red-600 px-8 py-1 text-center text-white rounded"
+              >
+                Add Episode
+              </label>
             </div>
           </div>
 

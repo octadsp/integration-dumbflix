@@ -1,59 +1,74 @@
-import { useEffect, useRef, useState } from "react";
-import Navbar from "../components/pages/Navbar";
-
-import AttachImg from "../assets/attach.png";
+// Import useMutation
+import { useMutation } from "react-query";
 
 // Import API config
 import { API } from "../config/api";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 
-const AddFilm = () => {
-  const navigate = useNavigate();
+// Import React-router-dom
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
 
-  const [getRowFilm, setRowFilm] = useState(0);
+// Import Component
+import Navbar from "../components/pages/Navbar";
+import AttachImg from "../assets/attach.png";
+
+const UpdateFilmAdmin = () => {
+  let navigate = useNavigate();
+  const { id } = useParams();
 
   const fileInputRef = useRef(null);
 
-  // State for categories
-  const [categories, setCategories] = useState([]);
-
-  // State for storing some data
-  const [preview, setPreview] = useState(null); //For thumbnail preview
-  const [getFormFilm, setFormFilm] = useState({
+  const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState([]); //Store all category data
+  const [preview, setPreview] = useState(null); //For image preview
+  const [form, setForm] = useState({
     title: "",
     thumbnail: "",
     year: "",
     category_id: "",
     description: "",
-  });
+  }); //Store film data
 
-  // Fetching Category data
-  const getCategories = async () => {
-    try {
-      const response = await API.get("/categories");
-      setCategories(response.data.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  async function getDataUpdate() {
+    const responseFilm = await API.get("/film/" + id);
+    const responseCategories = await API.get("/categories");
+    setCategories(responseCategories.data.data);
+    setPreview(responseFilm.data.data.thumbnail);
 
-  // Handle change data on form
+    // const newCategoryId = responseFilm.data.data?.category?.map((item) => {
+    //   return item.id;
+    // });
+    // console.log(newCategoryId);
+
+    setForm({
+      ...form,
+      title: responseFilm.data.data.title,
+      year: responseFilm.data.data.year,
+      description: responseFilm.data.data.description,
+      category_id: responseFilm.data.data.category_id,
+    });
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    getDataUpdate();
+  }, []);
+
   const handleChange = (e) => {
-    setFormFilm({
-      ...getFormFilm,
+    setForm({
+      ...form,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
     });
 
-    // Create thumbnail url for preview
+    // Create image url for preview
     if (e.target.type === "file") {
       let url = URL.createObjectURL(e.target.files[0]);
       setPreview(url);
     }
   };
 
-  const handleAddForm = useMutation(async (e) => {
+  const handleSubmit = useMutation(async (e) => {
     try {
       e.preventDefault();
 
@@ -66,23 +81,21 @@ const AddFilm = () => {
 
       // Store data with FormData as object
       const formData = new FormData();
-      formData.set("title", getFormFilm.title);
-      formData.set(
-        "thumbnail",
-        getFormFilm.thumbnail[0],
-        getFormFilm.thumbnail[0].name
-      );
-      formData.set("year", getFormFilm.year);
-      formData.set("description", getFormFilm.description);
-      formData.set("category_id", Number(getFormFilm.category_id));
+      formData.set("title", form.title);
+      if (form.thumbnail) {
+        formData.set("thumbnail", form?.thumbnail[0], form?.thumbnail[0].name);
+      }
+      formData.set("year", form.year);
+      formData.set("description", form.description);
+      formData.set("category_id", Number(form.category_id));
 
       // Insert product data
-      const response = await API.post("/film", formData, config);
-      console.log("add product success : ", response);
-      // navigate('/')
+      const response = await API.patch("/film/" + id, formData, config);
+      console.log("update film success : ", response);
+      navigate("/admin");
     } catch (error) {
-      console.log("add product failed : ", error);
-      console.log(getFormFilm);
+      console.log("update film failed : ", error);
+      console.log(form);
     }
   });
 
@@ -90,25 +103,22 @@ const AddFilm = () => {
     fileInputRef.current.click();
   };
 
-  useEffect(() => {
-    getCategories();
-  }, []);
-
   return (
     <>
       <Navbar />
       <div className="flex flex-col w-3/4 mx-auto pt-14">
         <div className="py-7 text-xl font-bold text-white">
-          <h1>ADD FILM</h1>
+          <h1>UPDATE FILM</h1>
         </div>
 
-        <form onSubmit={(e) => handleAddForm.mutate(e)}>
+        <form onSubmit={(e) => handleSubmit.mutate(e)}>
           <div className="flex flex-row gap-4">
             <input
               onChange={handleChange}
               id="title"
               name="title"
               form="title"
+              value={form?.title}
               type="text"
               placeholder="Title"
               className="input input-border ring-1 ring-white hover:ring-cyan-500 focus:ring-cyan-500 focus:placeholder-white bg-neutral-600 text-white w-full mb-6"
@@ -141,6 +151,7 @@ const AddFilm = () => {
               id="year"
               name="year"
               form="year"
+              value={form?.year}
               type="text"
               placeholder="Year"
               className="input input-border ring-1 ring-white hover:ring-cyan-500 focus:ring-cyan-500 focus:placeholder-white bg-neutral-600 text-white w-full mb-6"
@@ -167,6 +178,7 @@ const AddFilm = () => {
               onChange={handleChange}
               id="description"
               name="description"
+              value={form?.description}
               form="description"
               type="text"
               style={{ resize: "none" }}
@@ -229,4 +241,4 @@ const AddFilm = () => {
   );
 };
 
-export default AddFilm;
+export default UpdateFilmAdmin;
