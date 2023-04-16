@@ -79,7 +79,7 @@ const AddFilm = () => {
       // Insert product data
       const response = await API.post("/film", formData, config);
       console.log("add product success : ", response);
-      // navigate('/')
+      navigate("/admin");
     } catch (error) {
       console.log("add product failed : ", error);
       console.log(getFormFilm);
