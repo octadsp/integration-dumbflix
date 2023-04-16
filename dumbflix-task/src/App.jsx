@@ -84,7 +84,7 @@ const App = () => {
               <Route path="/tvshow" element={<TvSeries />} />
               <Route path="/payment" element={<Payment />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/detail/:id" element={<DetailMovies />} />
+              <Route path="/film/:id" element={<DetailMovies />} />
             </Route>
 
             <Route element={<PrivateRouteAdmin />}>

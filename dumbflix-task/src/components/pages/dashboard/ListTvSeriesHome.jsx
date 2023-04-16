@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Import useQuery
 import { useQuery } from "react-query";
@@ -16,7 +16,7 @@ const ListTvSeriesHome = () => {
   });
 
   const categoryFilms = films?.filter((film) => film.category_id === 1);
-  
+
   // const isUserLoggin = JSON.parse(
   //   localStorage.getItem("userLoggedIn")
   // )?.isLoggin;
@@ -38,7 +38,10 @@ const ListTvSeriesHome = () => {
         {films?.length !== 0 ? (
           <>
             {categoryFilms?.map((item, index) => (
-              <a className="carousel-item card-body px-5 cursor-pointer">
+              <Link
+                to={`/film/` + item.id}
+                className="carousel-item card-body px-5 cursor-pointer"
+              >
                 <div className="w-[200px] h-[300px]">
                   <img
                     className="h-full"
@@ -50,7 +53,7 @@ const ListTvSeriesHome = () => {
                   <h1 className="mb-3">{item.title}</h1>
                   <p>{item.year}</p>
                 </div>
-              </a>
+              </Link>
             ))}
           </>
         ) : (
