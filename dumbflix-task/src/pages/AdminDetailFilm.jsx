@@ -88,7 +88,7 @@ const DetailMovies = () => {
               </label>
             </div>
           </div>
-          <EpisodeModal />
+          <EpisodeModal idFilm={films.id} />
 
           <div className="flex justify-between">
             {/* LEFT CARD */}

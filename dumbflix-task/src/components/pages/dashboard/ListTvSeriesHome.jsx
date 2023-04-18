@@ -41,6 +41,7 @@ const ListTvSeriesHome = () => {
               <Link
                 to={`/film/` + item.id}
                 className="carousel-item card-body px-5 cursor-pointer"
+                key={index}
               >
                 <div className="w-[200px] h-[300px]">
                   <img
@@ -59,7 +60,10 @@ const ListTvSeriesHome = () => {
         ) : (
           <>
             {categoryFilms?.map((item, index) => (
-              <a className="carousel-item card-body px-5 cursor-pointer">
+              <a
+                className="carousel-item card-body px-5 cursor-pointer"
+                key={index}
+              >
                 <div className="w-[200px] h-[300px]"></div>
                 <div>
                   <h1 className="mb-3">Movies Not Found</h1>

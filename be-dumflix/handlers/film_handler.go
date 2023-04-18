@@ -48,6 +48,7 @@ func (h *handlerFilm) GetFilm(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: film})
 }
+
 func (h *handlerFilm) GetFilmAdmin(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 

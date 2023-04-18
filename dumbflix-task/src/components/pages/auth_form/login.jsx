@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
 
-  const [_, dispatch] = useContext(UserContext);
+  const [ state, dispatch] = useContext(UserContext);
 
   const [getUser, setUser] = useState({
     email: "",

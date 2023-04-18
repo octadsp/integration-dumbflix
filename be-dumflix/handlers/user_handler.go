@@ -25,6 +25,10 @@ func (h *handlerUser) FindUsers(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
 	}
 
+	for i, p := range users {
+		users[i].AvatarProfile = path_file + p.AvatarProfile
+	}
+
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: users})
 }
 
@@ -37,6 +41,8 @@ func (h *handlerUser) GetUser(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
 	}
 
+	user.AvatarProfile = path_file + user.AvatarProfile
+
 	// Return a JSON response with a HTTP status code of 200 (OK) and the user information converted to a custom response struct in the response body
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: user})
 }
@@ -44,7 +50,21 @@ func (h *handlerUser) GetUser(c echo.Context) error {
 func (h *handlerUser) EditUser(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 
-	request := new(userdto.UserRequest)
+	// GET IMAGE FILE
+	imageFile := c.Get("imageFile").(string)
+
+	// request := new(userdto.UserRequest)
+
+	request := userdto.UserRequest{
+		Name:          c.FormValue("fullname"),
+		AvatarProfile: imageFile,
+		Email:         c.FormValue("email"),
+		Password:      c.FormValue("password"),
+		Gender:        c.FormValue("gender"),
+		Phone:         c.FormValue("phone"),
+		Address:       c.FormValue("address"),
+		Subscribe:     c.FormValue("subscribe"),
+	}
 	if err := c.Bind(&request); err != nil {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
 	}
@@ -53,9 +73,11 @@ func (h *handlerUser) EditUser(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
 	}
-
 	if request.Name != "" {
 		user.Name = request.Name
+	}
+	if request.AvatarProfile != "" {
+		user.AvatarProfile = request.AvatarProfile
 	}
 	if request.Email != "" {
 		user.Email = request.Email

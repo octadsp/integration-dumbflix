@@ -35,6 +35,7 @@ const ListMoviesHome = () => {
               <Link
                 to={`/film/` + item.id}
                 className="carousel-item card-body px-5 cursor-pointer"
+                key={index}
               >
                 <div className="w-[200px] h-[300px]">
                   <img

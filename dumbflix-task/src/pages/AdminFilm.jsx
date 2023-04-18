@@ -104,14 +104,14 @@ const AdminFilm = () => {
                 <div className="grid grid-cols-6 gap-2">
                   {categoryFilms1?.map((item, index) => (
                     <>
-                      <div>
+                      <div className="flex flex-col items-center">
                         <Link
                           to={`/filmadmin/${item.id}`}
-                          className="card-body px-5"
+                          className="card-body p-2"
                         >
-                          <div className="w-[200px] h-[300px]" key={index}>
+                          <div className="w-full h-72" key={index}>
                             <img
-                              className="h-full"
+                              className="h-full object-cover"
                               src={item.thumbnail}
                               alt={item.title}
                             />
@@ -121,13 +121,13 @@ const AdminFilm = () => {
                             <p>{item.year}</p>
                           </div>
                         </Link>
-                        <div>
-                          <div className="flex justify-evenly">
+                        <div className="mt-2">
+                          <div className="">
                             <label
                               onClick={() => {
                                 handleEdit(item.id);
                               }}
-                              className="btn bg-green-500 text-white font-bold rounded px-6"
+                              className="btn btn-sm bg-green-500 mr-2 text-white font-bold rounded px-6"
                             >
                               Edit
                             </label>
@@ -136,7 +136,7 @@ const AdminFilm = () => {
                                 handleDelete(item.id);
                               }}
                               htmlFor="my-modal"
-                              className="btn bg-red-600 text-white font-bold rounded"
+                              className="btn btn-sm bg-red-600 text-white font-bold rounded"
                             >
                               Delete
                             </button>
@@ -170,14 +170,14 @@ const AdminFilm = () => {
                 <div className="grid grid-cols-6 gap-2">
                   {categoryFilms2?.map((item, index) => (
                     <>
-                      <div>
+                      <div className="flex flex-col items-center">
                         <Link
                           to={`/filmadmin/${item.id}`}
-                          className="card-body px-5"
+                          className="card-body p-2"
                         >
-                          <div className="w-[200px] h-[300px]" key={index}>
+                          <div className="w-full h-72" key={index}>
                             <img
-                              className="h-full"
+                              className="h-full object-cover"
                               src={item.thumbnail}
                               alt={item.title}
                             />
@@ -187,13 +187,13 @@ const AdminFilm = () => {
                             <p>{item.year}</p>
                           </div>
                         </Link>
-                        <div>
-                          <div className="flex justify-evenly">
+                        <div className="mt-2">
+                          <div className="">
                             <label
                               onClick={() => {
                                 handleEdit(item.id);
                               }}
-                              className="btn bg-green-500 text-white font-bold rounded px-6"
+                              className="btn btn-sm bg-green-500 mr-2 text-white font-bold rounded px-6"
                             >
                               Edit
                             </label>
@@ -201,11 +201,11 @@ const AdminFilm = () => {
                               onClick={() => {
                                 handleDelete(item.id);
                               }}
-                              className="btn bg-red-600 text-white font-bold rounded"
+                              htmlFor="my-modal"
+                              className="btn btn-sm bg-red-600 text-white font-bold rounded"
                             >
                               Delete
                             </button>
-                            <DeleteFilmModal />
                           </div>
                         </div>
                       </div>

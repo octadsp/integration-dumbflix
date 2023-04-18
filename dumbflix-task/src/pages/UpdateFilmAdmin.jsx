@@ -84,7 +84,7 @@ const UpdateFilmAdmin = () => {
       formData.set("description", form.description);
       formData.set("category_id", Number(form.category_id));
 
-      // Insert product data
+      // Update film data
       const response = await API.patch("/film/" + id, formData, config);
       console.log("update film success : ", response);
       navigate("/admin");
