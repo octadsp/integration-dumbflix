@@ -1,10 +1,10 @@
-import ListTv from "../components/pages/movies/ListMovie";
+// import ListTv from "../components/pages/movies/ListMovie";
 
-import DropArrow from "../assets/dropdown/droparrow.png";
+// import DropArrow from "../assets/dropdown/droparrow.png";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/pages/Navbar";
-import ListMovie from "../components/pages/movies/ListMovie";
-import DeleteFilmModal from "../components/modal/DeleteFilmModal";
+// import ListMovie from "../components/pages/movies/ListMovie";
+// import DeleteFilmModal from "../components/modal/DeleteFilmModal";
 import { useEffect, useState } from "react";
 
 // Import react-query
@@ -41,7 +41,9 @@ const AdminFilm = () => {
 
   useEffect(() => {
     // execute delete data by id function
-    deleteById.mutate(idDelete);
+    if (idDelete) {
+      deleteById.mutate(idDelete);
+    }
   }, [idDelete]);
 
   // Handle on Category change
@@ -104,12 +106,12 @@ const AdminFilm = () => {
                 <div className="grid grid-cols-6 gap-2">
                   {categoryFilms1?.map((item, index) => (
                     <>
-                      <div className="flex flex-col items-center">
+                      <div className="flex flex-col items-center" key={index}>
                         <Link
                           to={`/filmadmin/${item.id}`}
                           className="card-body p-2"
                         >
-                          <div className="w-full h-72" key={index}>
+                          <div className="w-full h-72">
                             <img
                               className="h-full object-cover"
                               src={item.thumbnail}
@@ -170,12 +172,12 @@ const AdminFilm = () => {
                 <div className="grid grid-cols-6 gap-2">
                   {categoryFilms2?.map((item, index) => (
                     <>
-                      <div className="flex flex-col items-center">
+                      <div className="flex flex-col items-center" key={index}>
                         <Link
                           to={`/filmadmin/${item.id}`}
                           className="card-body p-2"
                         >
-                          <div className="w-full h-72" key={index}>
+                          <div className="w-full h-72">
                             <img
                               className="h-full object-cover"
                               src={item.thumbnail}
@@ -216,7 +218,7 @@ const AdminFilm = () => {
                 <div className="card-body px-5">
                   {films?.map((item, index) => (
                     <>
-                      <div className="w-[200px] h-[300px]"></div>
+                      <div className="w-[200px] h-[300px]" key={index}></div>
                       <div>
                         <h1 className="mb-3">Film not found</h1>
                         <p></p>

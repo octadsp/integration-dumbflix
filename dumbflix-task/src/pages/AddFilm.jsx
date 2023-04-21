@@ -76,7 +76,7 @@ const AddFilm = () => {
       formData.set("description", getFormFilm.description);
       formData.set("category_id", Number(getFormFilm.category_id));
 
-      // Insert product data
+      // Insert Film data
       const response = await API.post("/film", formData, config);
       console.log("add product success : ", response);
       navigate("/admin");
