@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState(null);
 
-  const [ state, dispatch] = useContext(UserContext);
+  const [state, dispatch] = useContext(UserContext);
 
   const [getUser, setUser] = useState({
     email: "",
@@ -38,21 +38,6 @@ const Login = () => {
       const response = await API.post("/login", getUser);
 
       console.log("login success : ", response);
-
-      // Send data to useContext
-      dispatch({
-        type: "LOGIN_SUCCESS",
-        payload: response.data.data,
-      });
-
-      setAuthToken(localStorage.token);
-
-      // Status check
-      if (response.data.data.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
 
       const alert = (
         <div className="alert alert-success shadow-lg">
@@ -80,6 +65,23 @@ const Login = () => {
         email: "",
         password: "",
       });
+
+      // Status check
+      setTimeout(() => {
+        // Send data to useContext
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: response.data.data,
+        });
+
+        setAuthToken(localStorage.token);
+
+        if (response.data.data.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }, 3000);
     } catch (err) {
       const alert = (
         <div className="alert alert-error shadow-lg">
