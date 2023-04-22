@@ -1,66 +1,133 @@
-import { useRef } from "react"
-import Navbar from "../components/pages/Navbar"
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/pages/Navbar";
+import { API } from "../config/api";
+import { useMutation } from "react-query";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../context/userContext";
 
 const Payment = () => {
+  const [state] = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const fileInputRef = useRef(null)
+  const handleBuy = useMutation(async (e) => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  }
+      const data = {
+        userId: state.user.id,
+        price: e.price,
+      };
 
+      const body = JSON.stringify(data);
+
+      const response = await API.post("/transaction", body, config);
+      console.log("transaction success :", response);
+
+      const token = response.data.data.token;
+      window.snap.pay(token, {
+        onSuccess: function (result) {
+          /* You may add your own implementation here */
+          console.log(result);
+          navigate("/payment");
+        },
+        onPending: function (result) {
+          /* You may add your own implementation here */
+          console.log(result);
+          navigate("/payment");
+        },
+        onError: function (result) {
+          /* You may add your own implementation here */
+          console.log(result);
+          navigate("/payment");
+        },
+        onClose: function () {
+          /* You may add your own implementation here */
+          alert("you closed the popup without finishing the payment");
+        },
+      });
+    } catch (error) {
+      console.log("transaction failed : ", error);
+    }
+  });
+
+  useEffect(() => {
+    //change this to the script source you want to load, for example this is snap.js sandbox env
+    const midtransScriptUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
+    //change this according to your client-key
+    const myMidtransClientKey = import.meta.env
+      .VITE_REACT_APP_MIDTRANS_CLIENT_KEY;
+
+    let scriptTag = document.createElement("script");
+    scriptTag.src = midtransScriptUrl;
+    // optional if you want to set script attribute
+    // for example snap.js have data-client-key attribute
+    scriptTag.setAttribute("data-client-key", myMidtransClientKey);
+
+    document.body.appendChild(scriptTag);
+    return () => {
+      document.body.removeChild(scriptTag);
+    };
+  }, []);
 
   return (
     <>
-    <Navbar />
-    <div className=" bg-black h-[100vh]">
+      <Navbar />
+      <div className=" bg-black h-[100vh]">
         <div className="grid place-content-center">
-        {/* Title */}
-        <div className="pt-28 grid place-content-center">
-          <h1 className="text-4xl font-bold text-white">
-            Premium
-          </h1>
-        </div>
-
-        {/* Description */}
-        
-        <div>
-          <div className="mt-5">
-          <p>Bayar sekarang dan nikmati streaming film-film yang kekinian dari&nbsp;
-            <span className="text-red-600">
-              DUMFLIX
-            </span>
-          </p>
+          {/* Title */}
+          <div className="pt-28 grid place-content-center">
+            <h1 className="text-4xl font-bold text-white">Premium</h1>
           </div>
-          <div>
-          <p className="flex justify-center">
-            <span className="text-red-600">
-              DUMBFLIX
-            </span>
-            &nbsp;: 0981312323
-          </p>
-          </div>
-        </div>
 
-        {/* Input Form */}
-        <div className="flex mt-7">
-          <div className="flex flex-col w-full items-center">
-          <input type="number" name="fullname" placeholder="Input your account number" className="input input-border ring-1 ring-white hover:ring-cyan-500 focus:ring-cyan-500 focus:placeholder-white bg-neutral-600 text-white w-full max-w-sm" />
-          <a className="w-full max-w-sm">
-            <input ref={fileInputRef} type="file" hidden className="file-input file-input-bordered w-full max-w-xs bg-white file:-order-none" />
-            <button onClick={handleButtonClick} className="flex bg-white text-red-600 font-bold w-full max-w-sm py-3 pl-3 rounded mt-3">Attache proof of transfer</button>
-          </a>
-          </div>
-        </div>
+          {/* Description */}
 
-        {/* Button Send */}
-        <div className="flex justify-center mt-10">
-                <a className="bg-red-700 text-white text-center py-2 rounded cursor-pointer w-full max-w-sm">Kirim</a>
+          <div className="flex flex-col items-center">
+            <div className="mt-5">
+              <p>
+                Bayar sekarang dan nikmati streaming film-film yang kekinian
+                dari&nbsp;
+                <span className="text-red-600">DUMFLIX</span>
+              </p>
             </div>
-        </div>
-    </div>
-    </>
-  )
-}
 
-export default Payment
+            <div className="card w-96 bg-base-100 shadow-xl image-full mt-20">
+              <figure>
+                <img src="https://www.hdwallpapers.in/download/money_heist_characters_hd_money_heist-2560x1440.jpg" />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title text-white text-3xl font-bold justify-center">
+                  Basic
+                </h2>
+                <p className="card-title text-base justify-center text-white">
+                  1 Month
+                  <span className="text-red-600 bg-black/50 rounded">
+                    DUMFLIX
+                  </span>
+                  plans
+                </p>
+                <p className="card-title text-lg font-bold justify-center text-white">
+                  Rp. 30.000,-
+                </p>
+                <div className="card-actions justify-center">
+                  <button
+                    onClick={() => handleBuy.mutate({ price: 30000 })}
+                    type="submit"
+                    className="btn bg-green-700 font-bold text-white/70 hover:bg-green-500 hover:text-white"
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Payment;

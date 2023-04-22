@@ -4,6 +4,7 @@ type Transaction struct {
 	ID        int    `json:"id" gorm:"primary_key:auto_increment"`
 	StartDate string `json:"startDate"`
 	DueDate   string `json:"dueDate"`
+	Price     int    `json:"price"`
 	UserID    int    `json:"userId"`
 	User      User   `json:"user"`
 	Status    string `json:"status"  gorm:"type:varchar(25)"`

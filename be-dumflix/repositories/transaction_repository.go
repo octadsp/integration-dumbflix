@@ -13,6 +13,7 @@ type TransactionRepository interface {
 	AddTransaction(transaction models.Transaction) (models.Transaction, error)
 	EditTransaction(transaction models.Transaction) (models.Transaction, error)
 	DeleteTransaction(transaction models.Transaction) (models.Transaction, error)
+	UpdateTransaction(status string, orderId int) (models.Transaction, error)
 }
 
 func RepositoryTransaction(db *gorm.DB) *repository {
@@ -56,5 +57,21 @@ func (r *repository) EditTransaction(transaction models.Transaction) (models.Tra
 func (r *repository) DeleteTransaction(transaction models.Transaction) (models.Transaction, error) {
 	err := r.db.Delete(&transaction).Error
 
+	return transaction, err
+}
+
+func (r *repository) UpdateTransaction(status string, orderId int) (models.Transaction, error) {
+	var transaction models.Transaction
+	r.db.Preload("User").First(&transaction, orderId)
+
+	// if status != transaction.Status && status == "success" {
+	// 	var film models.Film
+	// 	r.db.First(&film, transaction.Film.ID)
+	// 	product.Qty = product.Qty - 1
+	// 	r.db.Save(&product)
+	// }
+
+	transaction.Status = status
+	err := r.db.Save(&transaction).Error
 	return transaction, err
 }

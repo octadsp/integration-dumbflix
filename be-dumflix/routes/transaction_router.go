@@ -18,4 +18,5 @@ func TransactionRoutes(e *echo.Group) {
 	e.POST("/transaction", h.AddTransaction)
 	e.PATCH("/transaction/:id", h.EditTransaction)
 	e.DELETE("/transaction/:id", h.DeleteTransaction)
+	e.POST("/notification", h.Notification)
 }
