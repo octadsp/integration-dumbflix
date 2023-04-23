@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 
 // Import API config
 import { API } from "../../../config/api";
+import { Link } from "react-router-dom";
 
 const ListTv = () => {
   // Fetching data films from database
@@ -24,7 +25,7 @@ const ListTv = () => {
           <div className="grid grid-cols-6 gap-2">
             {categoryFilms?.map((item, index) => (
               <>
-                <div className="card-body px-5">
+                <Link to={`/film/` + item.id} className="card-body px-5">
                   <div className="w-[200px] h-[300px]" key={index}>
                     <img
                       className="h-full"
@@ -36,7 +37,7 @@ const ListTv = () => {
                     <h1 className="mb-3">{item.title}</h1>
                     <p>{item.year}</p>
                   </div>
-                </div>
+                </Link>
               </>
             ))}
           </div>

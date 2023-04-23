@@ -128,7 +128,7 @@ const DetailMovies = () => {
                       </div>
                       <div>
                         <p className="pt-1 pl-9">
-                          {films.title} : {item.name}
+                          {films?.title} : {item.name}
                         </p>
                       </div>
                     </div>

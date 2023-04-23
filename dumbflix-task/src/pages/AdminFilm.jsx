@@ -87,12 +87,12 @@ const AdminFilm = () => {
         </div>
 
         <div className="flex">
-          <a
-            onClick={() => navigate("/addfilm")}
+          <Link
+            to={"/addfilm"}
             className="bg-red-700 text-white px-14 py-2 rounded cursor-pointer mr-10"
           >
             Add Film
-          </a>
+          </Link>
         </div>
       </div>
 

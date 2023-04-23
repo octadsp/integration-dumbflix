@@ -78,8 +78,9 @@ const Login = () => {
 
         if (response.data.data.role === "admin") {
           navigate("/admin");
+          window.location.reload();
         } else {
-          navigate("/");
+          window.location.reload();
         }
       }, 3000);
     } catch (err) {

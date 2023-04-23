@@ -45,15 +45,14 @@ func (h *handlerAuth) Register(c echo.Context) error {
 	}
 
 	user := models.User{
-		Name:          request.Name,
-		AvatarProfile: "defaultAvatar.png",
-		Email:         request.Email,
-		Password:      password,
-		Gender:        request.Gender,
-		Phone:         request.Phone,
-		Address:       request.Address,
-		Subscribe:     request.Subscribe,
-		Role:          "user",
+		Name:      request.Name,
+		Email:     request.Email,
+		Password:  password,
+		Gender:    request.Gender,
+		Phone:     request.Phone,
+		Address:   request.Address,
+		Subscribe: request.Subscribe,
+		Role:      "user",
 	}
 
 	data, err := h.AuthRepository.Register(user)
@@ -114,11 +113,11 @@ func (h *handlerAuth) Login(c echo.Context) error {
 	}
 
 	loginResponse := authdto.LoginResponse{
-		ID:    user.ID,
+		ID:            user.ID,
 		AvatarProfile: user.AvatarProfile,
-		Email: user.Email,
-		Token: token,
-		Role:  user.Role,
+		Email:         user.Email,
+		Token:         token,
+		Role:          user.Role,
 	}
 
 	return c.JSON(http.StatusOK, dto.SuccessResult{Code: http.StatusOK, Data: loginResponse})

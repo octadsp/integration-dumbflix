@@ -2,19 +2,19 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../../context/userContext";
 
-const Body = ({ image, title, description, years, category }) => {
+const BodyTv = ({ image, title, description, years, category }) => {
   const navigate = useNavigate();
   const [state] = useContext(UserContext);
 
   console.log(state.user);
 
   const openLoginModal = () => {
-      document.querySelector("#login").click();
+    document.querySelector("#login").click();
   };
 
   const handleWatchNow = () => {
     if (state.user.role === "user") {
-      return navigate("/film/3");
+      return navigate("/film/2");
     } else {
       openLoginModal();
     }
@@ -43,4 +43,4 @@ const Body = ({ image, title, description, years, category }) => {
   );
 };
 
-export default Body;
+export default BodyTv;
