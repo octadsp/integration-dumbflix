@@ -5,6 +5,7 @@ import (
 	"be-dumflix/pkg/mysql"
 	"be-dumflix/routes"
 	"fmt"
+	"os"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -34,6 +35,8 @@ func main() {
 
 	e.Static("/uploads", "./uploads")
 
-	fmt.Println("Server berjalan di port 5000")
-	e.Logger.Fatal(e.Start(":5000"))
+	var PORT = os.Getenv("PORT")
+
+	fmt.Println("Server berjalan di port :" + PORT)
+	e.Logger.Fatal(e.Start(":" + PORT))
 }
