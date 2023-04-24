@@ -109,7 +109,7 @@ const Profile = () => {
                   <img
                     name="avatarprofile"
                     className="w-[250px] h-80 px-5 pt-5 object-cover"
-                    src={profile.thumbnail}
+                    src={state.user.thumbnail}
                   />
                   <div className="flex justify-center pt-5">
                     <label
