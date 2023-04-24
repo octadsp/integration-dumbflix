@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // Import useQuery
@@ -7,8 +7,12 @@ import { useQuery } from "react-query";
 // Import API config
 import { API } from "../../../config/api";
 
+// Import UserContext
+import { UserContext } from "../../../context/userContext";
+import { useContext } from "react";
+
 const ListTvSeriesHome = () => {
-  const navigate = useNavigate();
+  const [state] = useContext(UserContext);
 
   let { data: films } = useQuery("filmsCache", async () => {
     const response = await API.get("/films");
@@ -17,18 +21,15 @@ const ListTvSeriesHome = () => {
 
   const categoryFilms = films?.filter((film) => film.category_id === 1);
 
-  // const isUserLoggin = JSON.parse(
-  //   localStorage.getItem("userLoggedIn")
-  // )?.isLoggin;
+  const openLoginModal = () => {
+    document.querySelector("#login").click();
+  };
 
-  // const isLoggin = (each) => {
-  //   console.log(isUserLoggin);
-  //   if (isUserLoggin) {
-  //     navigate(`detail/${each.id}`);
-  //   } else {
-  //     return document.querySelector("#login").click();
-  //   }
-  // };
+  const handleWatchNow = () => {
+    if (state.user.role !== "user") {
+      openLoginModal();
+    }
+  };
 
   return (
     <div className="bg-black px-5">
@@ -39,6 +40,7 @@ const ListTvSeriesHome = () => {
           <>
             {categoryFilms?.map((item, index) => (
               <Link
+                onClick={handleWatchNow}
                 to={`/film/` + item.id}
                 className="carousel-item card-body px-5 cursor-pointer"
                 key={index}

@@ -7,7 +7,13 @@ import { useQuery } from "react-query";
 // Import API config
 import { API } from "../../../config/api";
 
+// Import UserContext
+import { UserContext } from "../../../context/userContext";
+import { useContext } from "react";
+
 const ListMoviesHome = () => {
+  const [state] = useContext(UserContext);
+
   let { data: films } = useQuery("filmsCache", async () => {
     const response = await API.get("/films");
     return response.data.data;
@@ -15,14 +21,15 @@ const ListMoviesHome = () => {
 
   const categoryFilms = films?.filter((film) => film.category_id === 2);
 
-  // const isLoggin = (each) => {
-  //     console.log(isUserLoggin);
-  //     if (isUserLoggin) {
-  //          navigate (`detail/${each.id}`)
-  //     } else {
-  //         return document.querySelector('#login').click()
-  //     }
-  // }
+  const openLoginModal = () => {
+    document.querySelector("#login").click();
+  };
+
+  const handleWatchNow = () => {
+    if (state.user.role !== "user") {
+      openLoginModal();
+    }
+  };
 
   return (
     <div className="bg-black px-5">
@@ -33,6 +40,7 @@ const ListMoviesHome = () => {
           <>
             {categoryFilms?.map((item, index) => (
               <Link
+                onClick={handleWatchNow}
                 to={`/film/` + item.id}
                 className="carousel-item card-body px-5 cursor-pointer"
                 key={index}

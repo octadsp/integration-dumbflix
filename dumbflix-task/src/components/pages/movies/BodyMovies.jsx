@@ -14,7 +14,7 @@ const BodyMovies = ({ image, title, description, years, category }) => {
 
   const handleWatchNow = () => {
     if (state.user.role === "user") {
-      return navigate("/film/2");
+      return navigate("/film/3");
     } else {
       openLoginModal();
     }
