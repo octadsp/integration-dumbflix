@@ -91,7 +91,7 @@ const App = () => {
 
             <Route element={<PrivateRouteAdmin />}>
               <Route exact path="/transaction" element={<ListTransaction />} />
-              <Route exact path="/admin" element={<AdminFilm />} />
+              {/* <Route exact path="/admin" element={<AdminFilm />} /> */}
               <Route exact path="/addfilm" element={<AddFilm />} />
               <Route
                 exact
