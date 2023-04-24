@@ -15,20 +15,20 @@ export function PrivateRouteLogin() {
   return <Outlet />;
 }
 
-// export function PrivateRouteUser() {
-//   const [state] = useContext(UserContext);
+export function PrivateRouteUser() {
+  const [state] = useContext(UserContext);
 
-//   if (state.user.role === "admin") {
-//     return <Navigate to="/" />;
-//   }
-//   return <Outlet />;
-// }
+  if (state.user.role === "admin") {
+    return <Navigate to="/" />;
+  }
+  return <Outlet />;
+}
 
-// export function PrivateRouteAdmin() {
-//   const [state] = useContext(UserContext);
+export function PrivateRouteAdmin() {
+  const [state] = useContext(UserContext);
 
-//   if (state.user.role !== "admin") {
-//     return <Navigate to="/" />;
-//   }
-//   return <Outlet />;
-// }
+  if (state.user.role !== "admin") {
+    return <Navigate to="/" />;
+  }
+  return <Outlet />;
+}

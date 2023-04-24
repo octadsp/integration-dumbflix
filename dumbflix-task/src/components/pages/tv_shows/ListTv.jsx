@@ -25,8 +25,12 @@ const ListTv = () => {
           <div className="grid grid-cols-6 gap-2">
             {categoryFilms?.map((item, index) => (
               <>
-                <Link to={`/film/` + item.id} className="card-body px-5">
-                  <div className="w-[200px] h-[300px]" key={index}>
+                <Link
+                  to={`/film/` + item.id}
+                  className="card-body px-5"
+                  key={index}
+                >
+                  <div className="w-[200px] h-[300px]">
                     <img
                       className="h-full"
                       src={item.thumbnail}

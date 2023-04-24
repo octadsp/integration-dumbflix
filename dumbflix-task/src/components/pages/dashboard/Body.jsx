@@ -6,8 +6,6 @@ const Body = ({ image, title, description, years, category }) => {
   const navigate = useNavigate();
   const [state] = useContext(UserContext);
 
-  console.log(state.user);
-
   const openLoginModal = () => {
       document.querySelector("#login").click();
   };

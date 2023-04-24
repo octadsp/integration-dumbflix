@@ -15,7 +15,11 @@ import ListTransaction from "./pages/ListTransaction";
 import AddFilm from "./pages/AddFilm";
 import AdminDetailFilm from "./pages/AdminDetailFilm";
 import UpdateFilmAdmin from "./pages/UpdateFilmAdmin";
-import { PrivateRouteLogin } from "./components/PrivateRoute";
+import {
+  PrivateRouteAdmin,
+  PrivateRouteLogin,
+  PrivateRouteUser,
+} from "./components/PrivateRoute";
 import { useState, useContext, useEffect } from "react";
 import Navbar from "./components/pages/Navbar";
 
@@ -77,17 +81,29 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route element={<PrivateRouteLogin />}>
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/tvshow" element={<TvSeries />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/film/:id" element={<DetailMovies />} />
+            <Route element={<PrivateRouteUser />}>
+              <Route exact path="/movies" element={<Movies />} />
+              <Route exact path="/tvshow" element={<TvSeries />} />
+              <Route exact path="/payment" element={<Payment />} />
+              <Route exact path="/profile" element={<Profile />} />
+              <Route exact path="/film/:id" element={<DetailMovies />} />
+            </Route>
 
-            <Route exact path="/transaction" element={<ListTransaction />} />
-            {/* <Route exact path="/admin" element={<AdminFilm />} /> */}
-            <Route exact path="/addfilm" element={<AddFilm />} />
-            <Route exact path="/filmadmin/:id" element={<AdminDetailFilm />} />
-            <Route exact path="/updatefilm/:id" element={<UpdateFilmAdmin />} />
+            <Route element={<PrivateRouteAdmin />}>
+              <Route exact path="/transaction" element={<ListTransaction />} />
+              {/* <Route exact path="/admin" element={<AdminFilm />} /> */}
+              <Route exact path="/addfilm" element={<AddFilm />} />
+              <Route
+                exact
+                path="/filmadmin/:id"
+                element={<AdminDetailFilm />}
+              />
+              <Route
+                exact
+                path="/updatefilm/:id"
+                element={<UpdateFilmAdmin />}
+              />
+            </Route>
           </Route>
         </Routes>
       )}

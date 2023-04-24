@@ -26,8 +26,8 @@ const ListMoviesHome = () => {
   };
 
   const handleWatchNow = () => {
-    if (state.user.role !== "user") {
-      openLoginModal();
+    if (state.user.role === "") {
+      return openLoginModal();
     }
   };
 
