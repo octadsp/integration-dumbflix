@@ -87,7 +87,7 @@ const Navbar = () => {
                   <div className="avatar">
                     <div className="w-7 rounded-full">
                       <label tabIndex={0}>
-                        <img src={state.user.avatarprofile} />
+                        <img src={state.user.thumbnail} />
                       </label>
                       <ul
                         tabIndex={0}
@@ -125,7 +125,7 @@ const Navbar = () => {
                   <div className="avatar">
                     <div className="w-7 rounded-full">
                       <label tabIndex={0}>
-                        <img src={state.user.avatarprofile} />
+                        <img src={state.user.thumbnail} />
                       </label>
                       <ul
                         tabIndex={0}
