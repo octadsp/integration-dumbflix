@@ -37,9 +37,9 @@ const Navbar = () => {
       <div className="flex justify-between items-center bg-light-black py-3">
         {state.isLogin ? (
           state.user.role == "admin" ? (
-            <div className="pl-5">
+            <Link to={"/transaction"} className="pl-5">
               <img className="w-24" src={logo} />
-            </div>
+            </Link>
           ) : (
             <>
               <div>
@@ -98,7 +98,7 @@ const Navbar = () => {
                             <div className="w-6">
                               <img src={filmImg}></img>
                             </div>
-                            <a onClick={() => navigate("/admin")}>Film</a>
+                            <Link to={"/"}>Film</Link>
                           </div>
                         </li>
 
