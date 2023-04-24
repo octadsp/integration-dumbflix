@@ -131,7 +131,6 @@ const EditProfileModal = () => {
                 name="gender"
                 form="gender"
                 onChange={handleChange}
-                value={state.user.gender}
                 className="input input-border ring-1 ring-white hover:ring-cyan-500 focus:ring-cyan-500 bg-neutral-600 w-full"
               >
                 <option className="hidden" value="default">
