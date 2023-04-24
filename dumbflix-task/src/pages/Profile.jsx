@@ -6,10 +6,11 @@ import ActiveImg from "../assets/icons/active.png";
 import GenderImg from "../assets/icons/gender.png";
 import PhoneImg from "../assets/icons/phone.png";
 import LocationImg from "../assets/icons/location.png";
+import EditProfileModal from "../components/modal/EditProfileModal";
 
 // Import UserContext
 import { UserContext } from "../context/userContext";
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Import API Config
 import { API } from "../config/api";
@@ -21,45 +22,8 @@ const Profile = () => {
   // State UserContext
   const [state] = useContext(UserContext);
 
-  // useReff for file input
-  const fileInputRef = useRef(null);
-
   // State Profile
   const [profile, setProfile] = useState({});
-
-  // State Change Profile Picture
-  const [preview, setPreview] = useState(null);
-  const [formAvatar, setFormAvatar] = useState({
-    thumbnail: "",
-  });
-
-  // Get Profile Picture Data
-  async function getDataProfilePicture() {
-    const responseProfile = await API.get(`/user/${state.user.id}`);
-
-    setFormAvatar({
-      thumbnail: responseProfile.data.data.avatarprofile,
-    });
-  }
-
-  useEffect(() => {
-    getDataProfilePicture();
-  }, []);
-
-  // Handle Change
-  const handleChange = (e) => {
-    setFormAvatar({
-      ...formAvatar,
-      [e.target.name]:
-        e.target.type === "file" ? e.target.files : e.target.value,
-    });
-  };
-
-  // Create image url for preview
-  if (e.target.type === "file") {
-    let url = URL.createObjectURL(e.target.files[0]);
-    setPreview(url);
-  }
 
   // Fetching profile by id from state
   const getProfileData = async () => {
@@ -75,39 +39,6 @@ const Profile = () => {
     getProfileData();
   }, []);
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleSubmit = useMutation(async (e) => {
-    try {
-      e.preventDefault();
-
-      // Configuration
-      const config = {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      };
-
-      // Store data with FormData as object
-      const formData = new FormData();
-      if (form.thumbnail) {
-        formData.set("thumbnail", form?.thumbnail[0], form?.thumbnail[0].name);
-      }
-
-      // Update User Profile
-      const response = await API.patch(
-        `/user/${state.user.id}`,
-        formData,
-        config
-      );
-      console.log("update profile sukses : ", response);
-      window.location.reload();
-    } catch (err) {
-      console.log("update profile failed : ", err);
-    }
-  });
   return (
     <>
       <Navbar />
@@ -174,31 +105,22 @@ const Profile = () => {
 
             <div>
               <div className="">
-                <form onSubmit={(e) => handleSubmit.mutate(e)}>
-                  <input
-                    onChange={handleChange}
-                    type="file"
-                    name="thumbnail"
-                    form="thumbnail"
-                    ref={fileInputRef}
-                    hidden
-                  />
+                <div>
                   <img
                     name="avatarprofile"
-                    onChange={handleChange}
-                    onClick={handleButtonClick}
                     className="w-[250px] h-80 px-5 pt-5 object-cover"
                     src={profile.avatarprofile}
                   />
                   <div className="flex justify-center pt-5">
-                    <button
-                      type="submit"
+                    <label
+                      htmlFor="my-modal-edit"
                       className="bg-red-600 text-white flex place-content-center py-3 mb-16 rounded text-sm w-3/4"
                     >
-                      Change Photo Profile
-                    </button>
+                      Edit Profile
+                    </label>
+                    <EditProfileModal />
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

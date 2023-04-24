@@ -15,11 +15,7 @@ import ListTransaction from "./pages/ListTransaction";
 import AddFilm from "./pages/AddFilm";
 import AdminDetailFilm from "./pages/AdminDetailFilm";
 import UpdateFilmAdmin from "./pages/UpdateFilmAdmin";
-import {
-  PrivateRouteAdmin,
-  PrivateRouteLogin,
-  PrivateRouteUser,
-} from "./components/PrivateRoute";
+import { PrivateRouteLogin } from "./components/PrivateRoute";
 import { useState, useContext, useEffect } from "react";
 import Navbar from "./components/pages/Navbar";
 

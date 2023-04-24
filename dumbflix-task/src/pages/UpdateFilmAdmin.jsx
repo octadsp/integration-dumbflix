@@ -87,7 +87,7 @@ const UpdateFilmAdmin = () => {
       // Update film data
       const response = await API.patch("/film/" + id, formData, config);
       console.log("update film success : ", response);
-      navigate("/admin");
+      navigate("/");
     } catch (error) {
       console.log("update film failed : ", error);
       console.log(form);
