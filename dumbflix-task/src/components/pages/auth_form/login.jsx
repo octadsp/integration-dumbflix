@@ -77,7 +77,7 @@ const Login = () => {
         setAuthToken(localStorage.token);
 
         if (response.data.data.role === "admin") {
-          navigate("/admin");
+          navigate("/");
           window.location.reload();
         } else {
           window.location.reload();
