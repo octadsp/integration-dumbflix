@@ -5,9 +5,16 @@ import (
 	userdto "be-dumflix/dto/user"
 	"be-dumflix/models"
 	"be-dumflix/repositories"
+	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 
+	"context"
+
+	"github.com/cloudinary/cloudinary-go/v2"
+	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 )
 
@@ -65,8 +72,30 @@ func (h *handlerUser) EditUser(c echo.Context) error {
 		Address:       c.FormValue("address"),
 		Subscribe:     c.FormValue("subscribe"),
 	}
+
 	if err := c.Bind(&request); err != nil {
 		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+
+	validation := validator.New()
+	err := validation.Struct(request)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()})
+	}
+
+	var ctx = context.Background()
+	var CLOUD_NAME = os.Getenv("CLOUD_NAME")
+	var API_KEY = os.Getenv("API_KEY")
+	var API_SECRET = os.Getenv("API_SECRET")
+
+	// Add your Cloudinary credentials ...
+	cld, _ := cloudinary.NewFromParams(CLOUD_NAME, API_KEY, API_SECRET)
+
+	// Upload file to Cloudinary ...
+	resp, err := cld.Upload.Upload(ctx, imageFile, uploader.UploadParams{Folder: "dumbflix"})
+
+	if err != nil {
+		fmt.Println(err.Error())
 	}
 
 	user, err := h.UserRepository.GetUser(id)
@@ -77,7 +106,7 @@ func (h *handlerUser) EditUser(c echo.Context) error {
 		user.Name = request.Name
 	}
 	if request.AvatarProfile != "" {
-		user.AvatarProfile = request.AvatarProfile
+		user.AvatarProfile = resp.SecureURL
 	}
 	if request.Email != "" {
 		user.Email = request.Email

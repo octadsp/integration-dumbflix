@@ -35,10 +35,10 @@ func UploadImage(next echo.HandlerFunc) echo.HandlerFunc {
 
 		// Get the filename of the saved file
 		data := tempFile.Name()
-		filename := data[8:] // split uploads/
+		// filename := data[8:] // split uploads/
 
 		// Set the filename as a context variable
-		c.Set("imageFile", filename)
+		c.Set("imageFile", data)
 		return next(c)
 	}
 }
