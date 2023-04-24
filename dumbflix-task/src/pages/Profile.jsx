@@ -27,6 +27,40 @@ const Profile = () => {
   // State Profile
   const [profile, setProfile] = useState({});
 
+  // State Change Profile Picture
+  const [preview, setPreview] = useState(null);
+  const [formAvatar, setFormAvatar] = useState({
+    thumbnail: "",
+  });
+
+  // Get Profile Picture Data
+  async function getDataProfilePicture() {
+    const responseProfile = await API.get(`/user/${state.user.id}`);
+
+    setFormAvatar({
+      thumbnail: responseProfile.data.data.avatarprofile,
+    });
+  }
+
+  useEffect(() => {
+    getDataProfilePicture();
+  }, []);
+
+  // Handle Change
+  const handleChange = (e) => {
+    setFormAvatar({
+      ...formAvatar,
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files : e.target.value,
+    });
+  };
+
+  // Create image url for preview
+  if (e.target.type === "file") {
+    let url = URL.createObjectURL(e.target.files[0]);
+    setPreview(url);
+  }
+
   // Fetching profile by id from state
   const getProfileData = async () => {
     try {
@@ -44,6 +78,36 @@ const Profile = () => {
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
+
+  const handleSubmit = useMutation(async (e) => {
+    try {
+      e.preventDefault();
+
+      // Configuration
+      const config = {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      };
+
+      // Store data with FormData as object
+      const formData = new FormData();
+      if (form.thumbnail) {
+        formData.set("thumbnail", form?.thumbnail[0], form?.thumbnail[0].name);
+      }
+
+      // Update User Profile
+      const response = await API.patch(
+        `/user/${state.user.id}`,
+        formData,
+        config
+      );
+      console.log("update profile sukses : ", response);
+      window.location.reload();
+    } catch (err) {
+      console.log("update profile failed : ", err);
+    }
+  });
   return (
     <>
       <Navbar />
@@ -110,8 +174,9 @@ const Profile = () => {
 
             <div>
               <div className="">
-                <form>
+                <form onSubmit={(e) => handleSubmit.mutate(e)}>
                   <input
+                    onChange={handleChange}
                     type="file"
                     name="thumbnail"
                     form="thumbnail"
@@ -120,6 +185,7 @@ const Profile = () => {
                   />
                   <img
                     name="avatarprofile"
+                    onChange={handleChange}
                     onClick={handleButtonClick}
                     className="w-[250px] h-80 px-5 pt-5 object-cover"
                     src={profile.avatarprofile}
