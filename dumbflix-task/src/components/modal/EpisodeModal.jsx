@@ -3,8 +3,10 @@ import { useMutation } from "react-query";
 
 // Import API config
 import { API } from "../../config/api";
+import { useNavigate } from "react-router-dom";
 
 const EpisodeModal = ({ idFilm }) => {
+  const navigate = useNavigate();
   const [preview, setPreview] = useState(null);
   const [notif, setNotif] = useState(null);
   const [formEpisode, setFormEpisode] = useState({
@@ -78,7 +80,7 @@ const EpisodeModal = ({ idFilm }) => {
       setNotif(alert);
 
       setTimeout(() => {
-        window.location.reload();
+        navigate("/");
       }, 2000);
     } catch (err) {
       console.log("Add Episode Failed : ", err);
