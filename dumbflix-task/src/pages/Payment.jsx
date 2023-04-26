@@ -9,6 +9,8 @@ const Payment = () => {
   const [state] = useContext(UserContext);
   const navigate = useNavigate();
 
+  console.log(state.user.subscribe);
+
   const handleBuy = useMutation(async (e) => {
     try {
       const config = {
@@ -95,33 +97,58 @@ const Payment = () => {
             </div>
 
             <div className="card w-96 bg-base-100 shadow-xl image-full mt-20">
+              {state.user.subscribe == "Active" ? (
+                <>
               <figure>
+                <img src="https://straightfromamovie.com/wp-content/uploads/2019/10/joker-movie-wallpaper.jpg" />
+              </figure>
+                  <div className="card-body">
+                    <h2 className="card-title text-white text-3xl font-bold justify-center">
+                      Congratulation
+                    </h2>
+                    <p className="card-title text-base justify-center text-white">
+                      1 Month
+                      <span className="text-red-600 bg-black/50 rounded">
+                        DUMFLIX
+                      </span>
+                      membership
+                    </p>
+                    <p className="bg-red-500/70 rounded-xl card-title text-2xl font-bold justify-center mx-auto text-white w-1/2">
+                      {state.user.subscribe}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                <figure>
                 <img src="https://www.hdwallpapers.in/download/money_heist_characters_hd_money_heist-2560x1440.jpg" />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title text-white text-3xl font-bold justify-center">
-                  Basic
-                </h2>
-                <p className="card-title text-base justify-center text-white">
-                  1 Month
-                  <span className="text-red-600 bg-black/50 rounded">
-                    DUMFLIX
-                  </span>
-                  plans
-                </p>
-                <p className="card-title text-lg font-bold justify-center text-white">
-                  Rp. 30.000,-
-                </p>
-                <div className="card-actions justify-center">
-                  <button
-                    onClick={() => handleBuy.mutate({ price: 30000 })}
-                    type="submit"
-                    className="btn bg-green-700 font-bold text-white/70 hover:bg-green-500 hover:text-white"
-                  >
-                    Buy Now
-                  </button>
-                </div>
-              </div>
+                  <div className="card-body">
+                    <h2 className="card-title text-white text-3xl font-bold justify-center">
+                      Basic
+                    </h2>
+                    <p className="card-title text-base justify-center text-white">
+                      1 Month
+                      <span className="text-red-600 bg-black/50 rounded">
+                        DUMFLIX
+                      </span>
+                      plans
+                    </p>
+                    <p className="card-title text-lg font-bold justify-center text-white">
+                      Rp. 30.000,-
+                    </p>
+                    <div className="card-actions justify-center">
+                      <button
+                        onClick={() => handleBuy.mutate({ price: 30000 })}
+                        type="submit"
+                        className="btn bg-green-700 font-bold text-white/70 hover:bg-green-500 hover:text-white"
+                      >
+                        Buy Now
+                      </button>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
