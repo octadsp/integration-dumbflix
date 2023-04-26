@@ -75,7 +75,7 @@ func (r *repository) UpdateTransaction(status string, orderId int) (models.Trans
 	if status == "success" {
 		var user models.User
 		r.db.First(&user, transaction.UserID)
-		user.Subscribe = "active"
+		user.Subscribe = "Active"
 		r.db.Save(&user)
 	}
 	err := r.db.Save(&transaction).Error
