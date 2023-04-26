@@ -72,7 +72,10 @@ func (r *repository) UpdateTransaction(status string, orderId int) (models.Trans
 	// }
 
 	transaction.Status = status
-	transaction.User.Subscribe = status
+	var user models.User
+	r.db.First(&user, transaction.UserID)
+	user.Subscribe = status
+	r.db.Save(&user)
 	err := r.db.Save(&transaction).Error
 	return transaction, err
 }
