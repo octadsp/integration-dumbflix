@@ -6,8 +6,31 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
 
 const Payment = () => {
-  const [state] = useContext(UserContext);
+  const [state, dispatch] = useContext(UserContext);
   const navigate = useNavigate();
+
+  const checkUser = async () => {
+    try {
+      const response = await API.get("/check-auth");
+      console.log("check user success : ", response);
+      // Get user data
+      let payload = response.data.data;
+      // Get token from local storage
+      payload.token = localStorage.token;
+      // Send data to useContext
+      dispatch({
+        type: "USER_SUCCESS",
+        payload,
+      });
+      setIsLoading(false);
+    } catch (error) {
+      console.log("check user failed : ", error);
+      dispatch({
+        type: "AUTH_ERROR",
+      });
+      setIsLoading(false);
+    }
+  };
 
   console.log(state.user.subscribe);
 
@@ -33,6 +56,7 @@ const Payment = () => {
       window.snap.pay(token, {
         onSuccess: function (result) {
           /* You may add your own implementation here */
+          checkUser();
           console.log(result);
           navigate("/payment");
         },
