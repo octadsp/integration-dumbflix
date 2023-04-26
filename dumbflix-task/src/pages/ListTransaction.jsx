@@ -58,13 +58,13 @@ const ListTransaction = () => {
               <hr className="flex mx-auto w-3/4"></hr>
               <div className="flex mx-auto bg-gray-600 gap-3 w-3/4 text-white">
                 <div className="w-14 px-1 py-3">
-                  <p>{item.id}</p>
+                  <p>{index + 1}</p>
                 </div>
                 <div className="w-48 px-1 py-3">
                   <p>{item.user.fullname}</p>
                 </div>
                 <div className="w-48 px-1 py-3">
-                  <p>Active</p>
+                  <p>30 / Hari</p>
                 </div>
                 <div className="w-48 px-1 py-3">
                   <p className="text-green-500">{item.user.subscribe}</p>
