@@ -51,7 +51,6 @@ const Payment = () => {
           alert("you closed the popup without finishing the payment");
         },
       });
-      window.location.reload();
     } catch (error) {
       console.log("transaction failed : ", error);
     }
