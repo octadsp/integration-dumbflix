@@ -47,9 +47,6 @@ const ListTransaction = () => {
             <div className="w-48 px-1 py-3">
               <p>Status Payment</p>
             </div>
-            <div className="w-20 px-1 py-3">
-              <p>Action</p>
-            </div>
           </div>
 
           {/* SUB HEAD */}
@@ -71,24 +68,6 @@ const ListTransaction = () => {
                 </div>
                 <div className="w-48 px-1 py-3">
                   <p className="text-green-500">{item.status}</p>
-                </div>
-                <div className="w-20 px-1 py-3">
-                  <div className="dropdown flex justify-center pt-1">
-                    <label tabIndex={0} className="">
-                      <img src={PolygonImg}></img>
-                    </label>
-                    <ul
-                      tabIndex={0}
-                      className="dropdown-content menu p-2 shadow bg-light-black rounded-box w-28"
-                    >
-                      <li>
-                        <a className="text-green-500">Approve</a>
-                      </li>
-                      <li>
-                        <a className="text-red-600">Cancel</a>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
               </div>
             </div>
