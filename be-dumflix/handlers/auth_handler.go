@@ -51,7 +51,7 @@ func (h *handlerAuth) Register(c echo.Context) error {
 		Gender:    request.Gender,
 		Phone:     request.Phone,
 		Address:   request.Address,
-		Subscribe: request.Subscribe,
+		Subscribe: "Non Active",
 		Role:      "user",
 	}
 

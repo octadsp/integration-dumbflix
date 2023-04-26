@@ -67,7 +67,7 @@ const ListTransaction = () => {
                   <p>Active</p>
                 </div>
                 <div className="w-48 px-1 py-3">
-                  <p className="text-green-500">{item.status}</p>
+                  <p className="text-green-500">{item.user.subscribe}</p>
                 </div>
                 <div className="w-48 px-1 py-3">
                   <p className="text-green-500">{item.status}</p>
