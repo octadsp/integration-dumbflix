@@ -22,13 +22,11 @@ const Payment = () => {
         type: "USER_SUCCESS",
         payload,
       });
-      setIsLoading(false);
     } catch (error) {
       console.log("check user failed : ", error);
       dispatch({
         type: "AUTH_ERROR",
       });
-      setIsLoading(false);
     }
   };
 
