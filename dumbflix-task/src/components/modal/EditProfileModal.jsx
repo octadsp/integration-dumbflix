@@ -84,7 +84,6 @@ const EditProfileModal = () => {
       );
       console.log("Update user success : ", response);
       window.location.reload();
-      navigate("/");
     } catch (error) {
       console.log("Update user failed : ", error);
     }
