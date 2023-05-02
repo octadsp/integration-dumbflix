@@ -70,7 +70,7 @@ const Profile = () => {
                   <img src={ActiveImg} className="w-7"></img>
                 </div>
                 <div className="flex flex-col ml-6">
-                  <p>Active</p>
+                  <p>{profile.subscribe}</p>
                   <p>Status</p>
                 </div>
               </div>
