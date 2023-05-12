@@ -21,7 +21,7 @@ function Hero(props) {
           </div>
           <button
             onClick={props.handleWatchNow}
-            className="btn btn-2xl bg-red-600 px-20 text-white rounded font-bold"
+            className="btn btn-xl bg-red-600 px-20 text-white rounded font-bold hover:ring-1 hover:ring-white"
           >
             WATCH NOW!
           </button>
