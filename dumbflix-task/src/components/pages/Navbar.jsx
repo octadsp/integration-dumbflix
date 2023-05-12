@@ -64,7 +64,7 @@ const Navbar = () => {
         ) : (
           <>
             <div>
-              <ul className="flex flex-row gap-6 ml-7 text-white text-center text-sm font-bold">
+              <ul className="flex flex-row gap-6 ml-7 text-white text-center text-sm font-bold hover:underline hover:text-red-600">
                 <li>
                   <a onClick={() => navigate("/")} className="cursor-pointer">
                     Home
@@ -169,14 +169,14 @@ const Navbar = () => {
               <label
                 htmlFor="my-modal-register"
                 id="register"
-                className="rounded bg-white text-red-600 px-6 py-1 mr-4 cursor-pointer"
+                className="btn btn-sm font-bold rounded bg-white text-red-600 px-5 mr-4 hover:ring-1 hover:ring-red-600"
               >
                 Register
               </label>
               <label
                 htmlFor="my-modal-login"
                 id="login"
-                className="rounded bg-red-600 text-white px-8 py-1 cursor-pointer"
+                className="btn btn-sm font-bold rounded bg-red-600 text-white px-7 hover:ring-1 hover:ring-white"
               >
                 Login
               </label>

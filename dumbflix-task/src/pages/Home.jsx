@@ -2,10 +2,9 @@ import Body from "../components/pages/dashboard/Body";
 import ListTvSeries from "../components/pages/dashboard/ListTvSeriesHome";
 import ListMovies from "../components/pages/dashboard/ListMoviesHome";
 import Navbar from "../components/pages/Navbar";
-import Login from "../components/pages/auth_form/login";
-import Register from "../components/pages/auth_form/register";
+import Login from "../components/pages/auth_form/Login";
+import Register from "../components/pages/auth_form/Register";
 import AdminFilm from "./AdminFilm";
-
 import Image from "../assets/witcher.png";
 
 // Import useContext
@@ -15,7 +14,6 @@ import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 
 const Home = () => {
-
   // UserContext
   const [state] = useContext(UserContext);
 
@@ -26,7 +24,7 @@ const Home = () => {
           <AdminFilm />
         ) : (
           <>
-          <Navbar />
+            <Navbar />
             <Body
               image={Image}
               title={"The Witcher"}
@@ -42,7 +40,7 @@ const Home = () => {
         )
       ) : (
         <>
-        <Navbar />
+          <Navbar />
           <Login />
           <Register />
           <Body
