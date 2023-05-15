@@ -11,8 +11,6 @@ import { useNavigate } from "react-router-dom";
 const AddFilm = () => {
   const navigate = useNavigate();
 
-  const [getRowFilm, setRowFilm] = useState(0);
-
   const fileInputRef = useRef(null);
 
   // State for categories
