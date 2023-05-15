@@ -20,14 +20,14 @@ const ListTransaction = () => {
     <>
       <Navbar />
       <div className="pt-20">
-        <div className="flex px-72">
-          <h1 className="py-5 text-white text-xl font-bold">
+        <div className="flex justify-center py-7">
+          <h1 className="font-bold text-white text-4xl">
             Incoming Transaction
           </h1>
         </div>
 
         {/* LIST TRANSACTION*/}
-        <div className="px-80">
+        <div className="flex flex-col">
           {/* HEAD */}
           <div className="flex mx-auto border bg-black gap-2 text-red-600">
             <div className="w-14 px-1 py-3">
@@ -49,7 +49,7 @@ const ListTransaction = () => {
 
           {/* SUB HEAD */}
           {transactions?.map((item, index) => (
-            <div key={index} className="border">
+            <div key={index} className="border flex mx-auto">
               <div className="flex mx-auto bg-gray-600 gap-2 text-white">
                 <div className="w-14 px-1 py-3">
                   <p>{index + 1}</p>
