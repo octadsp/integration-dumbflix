@@ -1,14 +1,32 @@
-import Navbar from "../components/pages/Navbar";
-import BodyTv from "../components/pages/tv_shows/BodyTv";
+import Navbar from "../components/Navbar";
 import ListTv from "../components/pages/tv_shows/ListTv";
-
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/userContext";
 import ImageShows from "../assets/tv_series/moneyBanner.png";
+import Hero from "../components/Hero";
 
 const TvSeries = () => {
+  const navigate = useNavigate();
+  const [state] = useContext(UserContext);
+
+  console.log(state.user);
+
+  const openLoginModal = () => {
+    document.querySelector("#login").click();
+  };
+
+  const handleWatchNow = () => {
+    if (state.user.role === "user") {
+      return navigate("/film/3");
+    } else {
+      openLoginModal();
+    }
+  };
   return (
     <>
       <Navbar />
-      <BodyTv
+      <Hero
         image={ImageShows}
         title={"La Casa De Papel"}
         description={
@@ -16,6 +34,7 @@ const TvSeries = () => {
         }
         years={"2019"}
         category={"TV Series"}
+        handleWatchNow={handleWatchNow}
       />
       <ListTv />
     </>

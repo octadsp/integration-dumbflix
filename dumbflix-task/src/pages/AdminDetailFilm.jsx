@@ -1,8 +1,8 @@
 // Import Component
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 import EpisodeModal from "../components/modal/EpisodeModal";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +11,7 @@ import CommingSoon from "../assets/soon.png";
 import ArrowButton from "../assets/arrowButton.png";
 
 // Import useQuery & useMutation
-import { useQuery, useMutation } from "react-query";
+import { useQuery } from "react-query";
 
 // Import API config
 import { API } from "../config/api";

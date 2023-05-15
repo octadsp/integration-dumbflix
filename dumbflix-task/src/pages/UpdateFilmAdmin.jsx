@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 
 // Import Component
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 import AttachImg from "../assets/attach.png";
 
 const UpdateFilmAdmin = () => {

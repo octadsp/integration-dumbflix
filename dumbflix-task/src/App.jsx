@@ -10,7 +10,6 @@ import Movies from "./pages/Movies";
 import DetailMovies from "./pages/DetailMovies";
 import Profile from "./pages/Profile";
 import Payment from "./pages/Payment";
-import AdminFilm from "./pages/AdminFilm";
 import ListTransaction from "./pages/ListTransaction";
 import AddFilm from "./pages/AddFilm";
 import AdminDetailFilm from "./pages/AdminDetailFilm";
@@ -21,7 +20,6 @@ import {
   PrivateRouteUser,
 } from "./components/PrivateRoute";
 import { useState, useContext, useEffect } from "react";
-import Navbar from "./components/pages/Navbar";
 
 // Import UserContext
 import { UserContext } from "./context/userContext";

@@ -1,5 +1,5 @@
 // Import Component
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 
 import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
@@ -9,8 +9,8 @@ import { useParams } from "react-router-dom";
 import CommingSoon from "../assets/soon.png";
 import ArrowButton from "../assets/arrowButton.png";
 
-// Import useQuery & useMutation
-import { useQuery, useMutation } from "react-query";
+// Import useQuery
+import { useQuery } from "react-query";
 
 // Import API config
 import { API } from "../config/api";
@@ -37,13 +37,11 @@ const DetailMovies = () => {
     const response = await API.get(`film/${id}/episodes`, id);
     return response.data.data;
   });
-  console.log(episodes);
 
-  let { data: films, refetch } = useQuery("filmsDetailCache", async () => {
+  let { data: films } = useQuery("filmsDetailCache", async () => {
     const response = await API.get(`film/${id}`, id);
     return response.data.data;
   });
-  console.log(films);
 
   return (
     <>

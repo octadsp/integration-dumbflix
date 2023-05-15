@@ -1,27 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
-import logo from "../../assets/logo.png";
-import filmImg from "../../assets/dropdown/filmdropdown.png";
-import billImg from "../../assets/dropdown/billdropdown.png";
-import profileImg from "../../assets/dropdown/profiledropdown.png";
-import logoutImg from "../../assets/dropdown/logoutdropdown.png";
+import logo from "../assets/logo.png";
+import filmImg from "../assets/dropdown/filmdropdown.png";
+import billImg from "../assets/dropdown/billdropdown.png";
+import profileImg from "../assets/dropdown/profiledropdown.png";
+import logoutImg from "../assets/dropdown/logoutdropdown.png";
 
 // Import UserContext
-import { UserContext } from "../../context/userContext";
+import { UserContext } from "../context/userContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   // UserContext
   const [state] = useContext(UserContext);
-
-  // const isLogginUser = JSON.parse(
-  //   localStorage.getItem("userLoggedIn")
-  // )?.isLoggin;
-
-  // const isAdmin =
-  //   JSON.parse(localStorage.getItem("userLoggedIn"))?.roles == "admin";
 
   const handleLogout = () => {
     localStorage.removeItem("token");

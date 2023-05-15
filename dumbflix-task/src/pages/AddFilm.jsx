@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 
 import AttachImg from "../assets/attach.png";
 

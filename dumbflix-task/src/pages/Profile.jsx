@@ -1,4 +1,4 @@
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 
 import ProfileImg from "../assets/icons/profile.png";
 import EmailImg from "../assets/icons/email.png";

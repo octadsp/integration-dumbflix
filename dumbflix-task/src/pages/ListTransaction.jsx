@@ -3,9 +3,7 @@ import { API } from "../config/api";
 
 // Import react-query
 import { useQuery } from "react-query";
-
-import PolygonImg from "../assets/dropdown/polygon.png";
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 
 const ListTransaction = () => {
   // Fetching data films from database

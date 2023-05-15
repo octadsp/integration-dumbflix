@@ -1,21 +1,35 @@
-import Body from "../components/pages/dashboard/Body";
 import ListTvSeries from "../components/pages/dashboard/ListTvSeriesHome";
 import ListMovies from "../components/pages/dashboard/ListMoviesHome";
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 import Login from "../components/pages/auth_form/Login";
 import Register from "../components/pages/auth_form/Register";
 import AdminFilm from "./AdminFilm";
 import Image from "../assets/witcher.png";
+import { useNavigate } from "react-router-dom";
 
 // Import useContext
 import { useContext } from "react";
 
 // Import UserContext
 import { UserContext } from "../context/userContext";
+import Hero from "../components/Hero";
 
 const Home = () => {
   // UserContext
   const [state] = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const openLoginModal = () => {
+    document.querySelector("#login").click();
+  };
+
+  const handleWatchNow = () => {
+    if (state.user.role === "user") {
+      return navigate("/film/1");
+    } else {
+      openLoginModal();
+    }
+  };
 
   return (
     <>
@@ -25,7 +39,7 @@ const Home = () => {
         ) : (
           <>
             <Navbar />
-            <Body
+            <Hero
               image={Image}
               title={"The Witcher"}
               description={
@@ -33,6 +47,7 @@ const Home = () => {
               }
               years={"2019"}
               category={"TV Series"}
+              handleWatchNow={handleWatchNow}
             />
             <ListTvSeries />
             <ListMovies />
@@ -43,7 +58,7 @@ const Home = () => {
           <Navbar />
           <Login />
           <Register />
-          <Body
+          <Hero
             image={Image}
             title={"The Witcher"}
             description={
@@ -51,6 +66,7 @@ const Home = () => {
             }
             years={"2019"}
             category={"TV Series"}
+            handleWatchNow={handleWatchNow}
           />
           <ListTvSeries />
           <ListMovies />

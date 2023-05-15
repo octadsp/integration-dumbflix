@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 import { API } from "../config/api";
 import { useMutation } from "react-query";
 import { useContext, useEffect } from "react";

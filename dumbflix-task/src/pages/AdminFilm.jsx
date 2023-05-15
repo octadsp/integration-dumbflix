@@ -2,7 +2,7 @@
 
 // import DropArrow from "../assets/dropdown/droparrow.png";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../components/pages/Navbar";
+import Navbar from "../components/Navbar";
 // import ListMovie from "../components/pages/movies/ListMovie";
 // import DeleteFilmModal from "../components/modal/DeleteFilmModal";
 import { useEffect, useState } from "react";
