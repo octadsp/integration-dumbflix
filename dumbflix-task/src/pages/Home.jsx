@@ -68,8 +68,8 @@ const Home = () => {
             category={"TV Series"}
             handleWatchNow={handleWatchNow}
           />
-          <ListTvSeries />
-          <ListMovies />
+          <ListTvSeries openLoginModal={openLoginModal}/>
+          <ListMovies/>
         </>
       )}
     </>

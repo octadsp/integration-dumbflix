@@ -45,14 +45,15 @@ func (h *handlerAuth) Register(c echo.Context) error {
 	}
 
 	user := models.User{
-		Name:      request.Name,
-		Email:     request.Email,
-		Password:  password,
-		Gender:    request.Gender,
-		Phone:     request.Phone,
-		Address:   request.Address,
-		Subscribe: "Non Active",
-		Role:      "user",
+		Name:          request.Name,
+		Email:         request.Email,
+		AvatarProfile: "https://res.cloudinary.com/dpxazv6a6/image/upload/v1684309412/dumbflix/defaultAvatar_m5zxqe.png",
+		Password:      password,
+		Gender:        request.Gender,
+		Phone:         request.Phone,
+		Address:       request.Address,
+		Subscribe:     "Non Active",
+		Role:          "user",
 	}
 
 	data, err := h.AuthRepository.Register(user)

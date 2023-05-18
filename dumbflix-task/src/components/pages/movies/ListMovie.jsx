@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import NotFound from "../../../assets/404.jpg";
 
 // Import useQuery
 import { useQuery } from "react-query";
@@ -19,41 +19,26 @@ const ListMovie = () => {
   return (
     <div className="bg-black px-5">
       <h1 className="font-bold text-white text-lg">Movies</h1>
-
       <div>
-        {films?.length !== 0 ? (
-          <div className="grid grid-cols-6 gap-2">
-            {categoryFilms?.map((item, index) => (
-              <>
-                <Link to={`/film/` + item.id} className="card-body px-5">
-                  <div className="w-[200px] h-[300px]" key={index}>
-                    <img
-                      className="h-full"
-                      src={item.thumbnail}
-                      alt={item.title}
-                    />
-                  </div>
-                  <div>
-                    <h1 className="mb-3">{item.title}</h1>
-                    <p>{item.year}</p>
-                  </div>
-                </Link>
-              </>
-            ))}
-          </div>
-        ) : (
-          <div className="card-body px-5">
-            {films?.map((item, index) => (
-              <>
-                <div className="w-[200px] h-[300px]"></div>
-                <div>
-                  <h1 className="mb-3">Film not found</h1>
-                  <p></p>
+        <div className="grid grid-cols-6 gap-2">
+          {categoryFilms?.map((item, index) => (
+            <>
+              <Link to={`/film/` + item.id} className="card-body px-5">
+                <div className="w-[200px] h-[300px]" key={index}>
+                  <img
+                    className="h-full"
+                    src={item.thumbnail}
+                    alt={item.title}
+                  />
                 </div>
-              </>
-            ))}
-          </div>
-        )}
+                <div>
+                  <h1 className="mb-3">{item.title}</h1>
+                  <p>{item.year}</p>
+                </div>
+              </Link>
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );
