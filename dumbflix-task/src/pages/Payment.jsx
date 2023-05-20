@@ -4,6 +4,8 @@ import { API } from "../config/api";
 import { useMutation } from "react-query";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../context/userContext";
+import NonActiveSubscribe from "../assets/detail/detailTv.png"
+import ActiveSubscribe from "../assets/detail/detailPlayback.png"
 
 const Payment = () => {
   const [state, dispatch] = useContext(UserContext);
@@ -122,7 +124,7 @@ const Payment = () => {
               {state.user.subscribe == "Active" ? (
                 <>
                   <figure>
-                    <img src="https://straightfromamovie.com/wp-content/uploads/2019/10/joker-movie-wallpaper.jpg" />
+                    <img src={ActiveSubscribe} />
                   </figure>
                   <div className="card-body">
                     <h2 className="card-title text-white text-3xl font-bold justify-center">
@@ -143,7 +145,7 @@ const Payment = () => {
               ) : (
                 <>
                   <figure>
-                    <img src="https://www.hdwallpapers.in/download/money_heist_characters_hd_money_heist-2560x1440.jpg" />
+                    <img src={NonActiveSubscribe} />
                   </figure>
                   <div className="card-body">
                     <h2 className="card-title text-white text-3xl font-bold justify-center">

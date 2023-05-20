@@ -30,10 +30,6 @@ const ListTvSeriesHome = ({ openLoginModal }) => {
     }
   };
 
-  const subscribeNotActive = () => {
-
-  }
-
   return (
     <div className="bg-black px-5">
       <h1 className="font-bold text-white text-lg">TV Series</h1>
