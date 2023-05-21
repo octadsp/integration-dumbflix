@@ -1,8 +1,8 @@
 import ListTvSeries from "../components/pages/dashboard/ListTvSeriesHome";
 import ListMovies from "../components/pages/dashboard/ListMoviesHome";
 import Navbar from "../components/Navbar";
-import Login from "../components/pages/auth_form/Login";
-import Register from "../components/pages/auth_form/Register";
+import Login from "../components/pages/auth_form/login";
+import Register from "../components/pages/auth_form/register";
 import AdminFilm from "./AdminFilm";
 import Image from "../assets/witcher.png";
 import { useNavigate } from "react-router-dom";
@@ -68,8 +68,8 @@ const Home = () => {
             category={"TV Series"}
             handleWatchNow={handleWatchNow}
           />
-          <ListTvSeries openLoginModal={openLoginModal}/>
-          <ListMovies/>
+          <ListTvSeries openLoginModal={openLoginModal} />
+          <ListMovies />
         </>
       )}
     </>

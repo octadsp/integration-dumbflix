@@ -9,8 +9,8 @@ import { API } from "../../../config/api";
 // Import UserContext
 import { UserContext } from "../../../context/userContext";
 import { useContext } from "react";
-import Login from "../auth_form/Login";
-import SubscribeModal from "../../modal/subscribeModal"
+import Login from "../auth_form/login";
+import SubscribeModal from "../../modal/subscribeModal";
 
 const ListTvSeriesHome = ({ openLoginModal }) => {
   const [state] = useContext(UserContext);
@@ -36,9 +36,8 @@ const ListTvSeriesHome = ({ openLoginModal }) => {
       <Login />
       <div className="carousel">
         {state.isLogin === true
-          ?
-          state.user.subscribe === "Active" ? (
-            categoryFilms?.map((item, index) => (
+          ? state.user.subscribe === "Active"
+            ? categoryFilms?.map((item, index) => (
                 <Link
                   to={`/film/` + item.id}
                   className="carousel-item card-body px-5 cursor-pointer"
@@ -57,30 +56,28 @@ const ListTvSeriesHome = ({ openLoginModal }) => {
                   </div>
                 </Link>
               ))
-          ) : (
-            categoryFilms?.map((item, index) => (
-              <>
-              <SubscribeModal />
-              <label
-              htmlFor="my-modal-subscribe"
-                className="carousel-item card-body px-5 cursor-pointer"
-                key={index}
-                >
-                <div className="w-[200px] h-[300px]">
-                  <img
-                    className="h-full"
-                    src={item.thumbnail}
-                    alt={item.title}
-                    />
-                </div>
-                <div>
-                  <h1 className="mb-3">{item.title}</h1>
-                  <p>{item.year}</p>
-                </div>
-              </label>
-                    </>
-            ))
-          )
+            : categoryFilms?.map((item, index) => (
+                <>
+                  <SubscribeModal />
+                  <label
+                    htmlFor="my-modal-subscribe"
+                    className="carousel-item card-body px-5 cursor-pointer"
+                    key={index}
+                  >
+                    <div className="w-[200px] h-[300px]">
+                      <img
+                        className="h-full"
+                        src={item.thumbnail}
+                        alt={item.title}
+                      />
+                    </div>
+                    <div>
+                      <h1 className="mb-3">{item.title}</h1>
+                      <p>{item.year}</p>
+                    </div>
+                  </label>
+                </>
+              ))
           : categoryFilms?.map((item, index) => (
               <Link
                 onClick={handleWatchNow}
