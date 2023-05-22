@@ -107,52 +107,28 @@ const DetailMovies = () => {
                       key={index}
                     >
                       <div className="flex justify-center items-center">
-                        {films.category_id === 1 ? (
-                          <>
-                            <div>
-                              <button
-                                className="w-3"
-                                onClick={handlePrevEpisode}
-                              >
-                                <img className="rotate-180" src={ArrowButton} />
-                              </button>
-                            </div>
-                            <div className="">
-                              <img
-                                src={item.image}
-                                className="h-[250px] w-[35vw] object-contain px-5"
-                                alt="Tailwind CSS Carousel component"
-                              />
-                            </div>
-                            <div>
-                              <button
-                                className="w-3"
-                                onClick={handleNextEpisode}
-                              >
-                                <img src={ArrowButton} />
-                              </button>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="">
-                              <img
-                                src={item.image}
-                                className="h-[250px] w-[35vw] object-contain px-5"
-                                alt="Tailwind CSS Carousel component"
-                              />
-                            </div>
-                          </>
-                        )}
+                        <div>
+                          <button className="w-3" onClick={handlePrevEpisode}>
+                            <img className="rotate-180" src={ArrowButton} />
+                          </button>
+                        </div>
+                        <div className="">
+                          <img
+                            src={item.image}
+                            className="h-[250px] w-[35vw] object-contain px-5"
+                            alt="Tailwind CSS Carousel component"
+                          />
+                        </div>
+                        <div>
+                          <button className="w-3" onClick={handleNextEpisode}>
+                            <img src={ArrowButton} />
+                          </button>
+                        </div>
                       </div>
                       <div>
-                        {films.category_id === 1 ? (
-                          <p className="pt-1 pl-9">
-                            {films?.title} : {item.name}
-                          </p>
-                        ) : (
-                          <p className="pt-1 pl-9">{item.name}</p>
-                        )}
+                        <p className="pt-1 pl-9">
+                          {films?.title} : {item.name}
+                        </p>
                       </div>
                     </div>
                   );
