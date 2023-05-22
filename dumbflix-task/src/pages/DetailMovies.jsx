@@ -57,6 +57,7 @@ const DetailMovies = () => {
                   url={item.episode_link}
                   width={"100%"}
                   height="550px"
+                  controls
                   light={
                     <div className="">
                       <img
