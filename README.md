@@ -2,6 +2,7 @@
 Sebelum Anda dapat menggunakan repository ini, pastikan Anda memiliki beberapa persyaratan berikut terpenuhi:
 
 1. **Node.js**: Pastikan Anda telah menginstal Node.js di sistem Anda. Anda dapat mengunduhnya dari [https://nodejs.org](https://nodejs.org) dan mengikuti petunjuk instalasi yang sesuai dengan sistem operasi Anda.
+2. **Golang**: Pastikan Anda telah menginstal Golang di sistem Anda. Anda dapat mengunduhnya dari [https://go.dev](https://go.dev) dan mengikuti petunjuk instalasi yang sesuai dengan sistem operasi Anda.
 
 ## Panduan Instalasi
 
