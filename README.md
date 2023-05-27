@@ -19,15 +19,16 @@ git clone https://github.com/octadsp/integration-dumbflix.git
 cd integration-dumbflix
 ```
 
-Install dependencies: Jalankan perintah berikut untuk menginstal semua dependensi yang diperlukan:
-
-Copy code
+3. **Install dependencies**: Jalankan perintah berikut untuk menginstal semua dependensi yang diperlukan:
+```
 npm install
-Menjalankan aplikasi: Setelah semua dependensi diinstal, jalankan perintah berikut untuk menjalankan aplikasi:
+```
 
-arduino
-Copy code
+4. **Menjalankan aplikasi**: Setelah semua dependensi diinstal, jalankan perintah berikut untuk menjalankan aplikasi:
+```
 npm run dev
+```
+
 Aplikasi akan dijalankan di mode pengembangan dan dapat diakses melalui http://localhost:3000.
 
 Menggunakan Build Tools ViteJS
