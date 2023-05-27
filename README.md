@@ -8,10 +8,12 @@ Sebelum Anda dapat menggunakan repository ini, pastikan Anda memiliki beberapa p
 Untuk menginstal dan menjalankan repository ini, ikuti langkah-langkah berikut:
 
 1. **Clone repository**: Clone repository ini ke komputer Anda dengan menggunakan perintah berikut di terminal atau command prompt:
-```
-bash
+<pre>
+<code>```bash
+# Clone the repository
 git clone https://github.com/username/repository.git
-```
+```</code>
+</pre>
 Masuk ke direktori: Masuk ke direktori repository yang telah di-clone:
 
 bash
