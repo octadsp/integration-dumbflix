@@ -31,5 +31,5 @@ npm run dev
 
 Aplikasi akan dijalankan di mode pengembangan dan dapat diakses melalui http://localhost:3000.
 
-Menggunakan Build Tools ViteJS
-Repository ini menggunakan build tools ViteJS untuk mengelola proses pengembangan dan produksi. Anda dapat menyesuaikan konfigurasi ViteJS sesuai kebutuhan Anda dengan mengedit file vite.config.js. Informasi lebih lanjut tentang ViteJS dapat ditemukan di [https://vitejs.dev](
+## Menggunakan Build Tools ViteJS
+Repository ini menggunakan build tools ViteJS untuk mengelola proses pengembangan dan produksi. Anda dapat menyesuaikan konfigurasi ViteJS sesuai kebutuhan Anda dengan mengedit file vite.config.js. Informasi lebih lanjut tentang ViteJS dapat ditemukan di [https://vitejs.dev]
