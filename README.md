@@ -1,11 +1,13 @@
-Persyaratan
+## Persyaratan
 Sebelum Anda dapat menggunakan repository ini, pastikan Anda memiliki beberapa persyaratan berikut terpenuhi:
 
-Node.js: Pastikan Anda telah menginstal Node.js di sistem Anda. Anda dapat mengunduhnya dari https://nodejs.org dan mengikuti petunjuk instalasi yang sesuai dengan sistem operasi Anda.
-Panduan Instalasi
+1. **Node.js**: Pastikan Anda telah menginstal Node.js di sistem Anda. Anda dapat mengunduhnya dari [https://nodejs.org](https://nodejs.org) dan mengikuti petunjuk instalasi yang sesuai dengan sistem operasi Anda.
+
+## Panduan Instalasi
+
 Untuk menginstal dan menjalankan repository ini, ikuti langkah-langkah berikut:
 
-Clone repository: Clone repository ini ke komputer Anda dengan menggunakan perintah berikut di terminal atau command prompt:
+1. **Clone repository**: Clone repository ini ke komputer Anda dengan menggunakan perintah berikut di terminal atau command prompt:
 
 bash
 Copy code
