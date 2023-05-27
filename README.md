@@ -9,15 +9,17 @@ Untuk menginstal dan menjalankan repository ini, ikuti langkah-langkah berikut:
 
 1. **Clone repository**: Clone repository ini ke komputer Anda dengan menggunakan perintah berikut di terminal atau command prompt:
 
-Client-Side
+``Client-Side``
+```
+git clone https://github.com/octadsp/repository.git
+```
+``Server-Side``
 ```
 git clone https://github.com/octadsp/repository.git
 ```
 
 Masuk ke direktori: Masuk ke direktori repository yang telah di-clone:
 
-``bash
-Copy code``
 ```
 cd repository
 ```
