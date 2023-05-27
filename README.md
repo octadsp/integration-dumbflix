@@ -11,15 +11,17 @@ Untuk menginstal dan menjalankan repository ini, ikuti langkah-langkah berikut:
 
 Client-Side
 ```
-#Frontend
 git clone https://github.com/octadsp/repository.git
 ```
 
 Masuk ke direktori: Masuk ke direktori repository yang telah di-clone:
 
-bash
-Copy code
+``bash
+Copy code``
+```
 cd repository
+```
+
 Install dependencies: Jalankan perintah berikut untuk menginstal semua dependensi yang diperlukan:
 
 Copy code
