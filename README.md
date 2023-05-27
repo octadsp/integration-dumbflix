@@ -9,9 +9,10 @@ Untuk menginstal dan menjalankan repository ini, ikuti langkah-langkah berikut:
 
 1. **Clone repository**: Clone repository ini ke komputer Anda dengan menggunakan perintah berikut di terminal atau command prompt:
 ```
-bash ```Copy code```
-git clone https://github.com/username/repository.git
+bash
 ```
+git clone https://github.com/username/repository.git
+
 Masuk ke direktori: Masuk ke direktori repository yang telah di-clone:
 
 bash
