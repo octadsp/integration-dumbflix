@@ -7,16 +7,17 @@ Sebelum Anda dapat menggunakan repository ini, pastikan Anda memiliki beberapa p
 
 Untuk menginstal dan menjalankan repository ini, ikuti langkah-langkah berikut:
 
-1. **Clone repository**: Clone repository ini ke komputer Anda dengan menggunakan perintah berikut di terminal atau command prompt:
+1. **Clone repository**: 
+    Clone repository ini ke komputer Anda dengan menggunakan perintah berikut di terminal atau command prompt:
 
 ```
 git clone https://github.com/octadsp/integration-dumbflix.git
 ```
 
-Masuk ke direktori: Masuk ke direktori repository yang telah di-clone:
+2. Masuk ke direktori: Masuk ke direktori repository yang telah di-clone:
 
 ```
-cd repository
+cd integration-dumbflix
 ```
 
 Install dependencies: Jalankan perintah berikut untuk menginstal semua dependensi yang diperlukan:
